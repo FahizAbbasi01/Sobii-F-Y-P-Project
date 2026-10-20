@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "tertiary-fixed-dim": "#bdc7d8", "surface-container-lowest": "#ffffff", "secondary-fixed-dim": "#b3c5ff", "on-error-container": "#93000a", "on-tertiary-container": "#818b9b", "on-primary": "#ffffff", "tertiary-fixed": "#d9e3f4", "surface-tint": "#4d5f7e", "on-surface-variant": "#44474d", "tertiary-container": "#1a2430", "error-container": "#ffdad6", "on-secondary-fixed-variant": "#003ea6", "secondary-container": "#226afc", "secondary": "#0051d3", "on-secondary-container": "#fefcff", "primary-fixed": "#d6e3ff", "on-primary-fixed-variant": "#364765", "on-tertiary-fixed-variant": "#3e4755", "secondary-fixed": "#dbe1ff", "on-error": "#ffffff", "surface-container": "#eceef1", "surface-bright": "#f7f9fc", "outline": "#75777e", "on-primary-container": "#798bac", "error": "#ba1a1a", "inverse-on-surface": "#eff1f4", "surface-variant": "#e0e3e6", "surface-dim": "#d8dadd", "surface-container-highest": "#e0e3e6", "inverse-primary": "#b5c7eb", "surface-container-high": "#e6e8eb", "on-secondary-fixed": "#00174a", "on-primary-fixed": "#071b37", "outline-variant": "#c5c6ce", "surface": "#f7f9fc", "on-tertiary-fixed": "#121c28", "on-tertiary": "#ffffff", "on-background": "#191c1e", "background": "#f7f9fc", "primary": "#000d23", "inverse-surface": "#2d3133", "tertiary": "#050e1a", "on-surface": "#191c1e", "on-secondary": "#ffffff", "primary-fixed-dim": "#b5c7eb", "surface-container-low": "#f2f4f7", "primary-container": "#10233f" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "1rem", "gutter": "1rem", "space-md": "1rem", "space-xl": "2rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "space-xs": "0.25rem" }, "fontFamily": { "body-lg": ["Inter"], "label-md": ["Inter"], "mono-imei": ["JetBrains Mono"], "body-md": ["Inter"], "mono-data": ["JetBrains Mono"], "headline-lg": ["Inter"], "label-lg": ["Inter"], "label-sm": ["Inter"], "headline-xl": ["Inter"], "body-sm": ["Inter"], "headline-md": ["Inter"] }, "fontSize": { "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }], "mono-imei": ["15px", { "lineHeight": "20px", "fontWeight": "500" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "mono-data": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "headline-lg": ["22px", { "lineHeight": "28px", "fontWeight": "700" }], "label-lg": ["14px", { "lineHeight": "18px", "fontWeight": "600" }], "label-sm": ["10px", { "lineHeight": "14px", "fontWeight": "600" }], "headline-xl": ["28px", { "lineHeight": "34px", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "headline-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }] } } } }</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(16,35,63,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="DeviceTrust Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1C2xSGbCWxl1gqgbw-I6y5aipN0t4ISUqi7yUztcFwoeY-5pTj9N7qK2PIpP1HXC-8wrLg-df0hFoEXuonnuvpjDehodsSX0pd8NujHajfTgpQY7DNP09VkJgpXSKcW0D810OVh4iWko3H1gttvff6PtxEiNa2NcqGbbTrfR5N8HBS4HpRjWkA7iA0JiV_L6J3ANUIuqB28niO6FUgRwrRaV6H0QVT9C60Kftxn2aGq9ERXCp02Q2eQ"/><div class="flex flex-col"><div class="flex items-center gap-1.5"><span class="font-headline-md text-headline-md tracking-tight text-primary">DeviceTrust</span><span class="hidden">Home</span></div><button class="flex items-center gap-0.5 text-on-surface-variant hover:text-secondary" type="button"><span class="material-symbols-outlined text-[13px] text-secondary">location_on</span><span class="font-label-sm text-label-sm">Lahore, PK</span><span class="material-symbols-outlined text-[12px]">expand_more</span></button></div></div><div class="flex items-center gap-space-xs"><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center relative text-on-surface hover:text-secondary rounded-full" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-secondary-container"></span></button><a class="w-11 h-11 flex items-center justify-center" data-path="profile" href="../devicetrust_login_registration/code.html" title="Account & Login"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_2px_6px_rgba(16,35,63,0.12)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyOvQE12FMzYnn0vmQuXNEYOAvSuoljJ6LPtSyLUlhKr8gTzXA9TKE2ukFtRzrYELaJZbZ3ZTma1EvYcJYl5K8Vm0h695psksLtBE2l2ph3YI4sS0LyUcew76f8aw9OzdiMVLFZiY-tlzJURajeUM1g-EVkMGyXHaR_SWSJiAQ_hLkeXSzlBHqY9rUSM357IpMvCCzNtwTZSU78ojbBHd0baCY6bS00OTnukQryuYa6ixAq3fcsk1yqQ"/></a></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full pb-8">
+<div class="px-margin pt-4 pb-2">
+<div class="flex items-center justify-between mb-1">
+<div class="flex items-center gap-1.5 bg-surface-container-low px-3 py-1 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-[15px] text-secondary">location_on</span>
+<span class="font-label-md text-label-md text-primary font-medium">Gulberg, Lahore</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">keyboard_arrow_down</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container px-2.5 py-1 rounded-full">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Live DB Sync</span>
+</div>
+</div>
+<div class="mt-2">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Find Your Next Phone</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Pakistan's premier fraud-free smartphone provenance exchange</p>
+</div>
+</div>
+<div class="px-margin my-3">
+<div class="relative flex items-center bg-surface-container-lowest rounded-xl shadow-sm">
+<span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full h-12 pl-10 pr-12 bg-transparent text-primary font-body-md text-body-md placeholder:text-outline focus:outline-none rounded-xl" id="marketplaceSearch" placeholder="Search iPhone 15, Galaxy S24, Xiaomi..." type="text"/>
+<button aria-label="Scan barcode or IMEI" class="absolute right-2 w-8 h-8 flex items-center justify-center rounded-lg bg-surface-container-low text-secondary hover:bg-secondary-fixed transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">qr_code_scanner</span>
+</button>
+</div>
+</div>
+<div class="px-margin my-2">
+<div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary-container via-primary to-tertiary p-5 text-on-primary shadow-md">
+<div class="absolute -right-6 -bottom-8 opacity-15 pointer-events-none">
+<span class="material-symbols-outlined text-[160px] text-on-primary">verified_user</span>
+</div>
+<div class="relative z-10">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/15 backdrop-blur-md mb-2.5">
+<span class="material-symbols-outlined text-[14px] text-secondary-fixed">shield_lock</span>
+<span class="font-label-sm text-label-sm text-secondary-fixed font-semibold tracking-wide uppercase">CPLC &amp; PTA Telemetry</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-primary leading-snug">Verify Before You Buy</h2>
+<p class="font-body-sm text-body-sm text-on-primary-container mt-1 max-w-[240px]">Instantly detect duplicate IMEIs, theft records, and unpaid customs duties.</p>
+<div class="flex items-center gap-2 mt-4">
+<a class="inline-flex items-center justify-center gap-1.5 px-4 h-11 rounded-lg bg-secondary-container text-on-secondary-container font-label-lg text-label-lg font-semibold shadow-sm hover:brightness-110 active:scale-95 transition-all" data-path="check-imei" href="#">
+<span class="material-symbols-outlined text-[18px]">search_check</span>
+<span>Check IMEI Now</span>
+</a>
+<div class="flex flex-col pl-2">
+<span class="font-label-md text-label-md font-bold text-on-primary leading-tight">14,200+</span>
+<span class="font-label-sm text-label-sm text-on-primary-container leading-tight">Stolen Phones Blocked</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 mb-2">
+<div class="px-margin flex items-center justify-between mb-2.5">
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight">Top Brands</h3>
+<a class="font-label-md text-label-md text-secondary font-semibold hover:underline" href="#">View All</a>
+</div>
+<div class="flex items-center gap-3 overflow-x-auto px-margin pb-2 scrollbar-none no-scrollbar">
+<button class="flex flex-col items-center justify-center min-w-[72px] h-[86px] rounded-xl bg-surface-container-lowest shadow-sm hover:bg-surface-container-low transition-all active:scale-95" type="button">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary mb-1.5">
+<span class="material-symbols-outlined text-[20px]">phone_iphone</span>
+</div>
+<span class="font-label-md text-label-md font-medium text-primary">iPhone</span>
+</button>
+<button class="flex flex-col items-center justify-center min-w-[72px] h-[86px] rounded-xl bg-surface-container-lowest shadow-sm hover:bg-surface-container-low transition-all active:scale-95" type="button">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary mb-1.5">
+<span class="material-symbols-outlined text-[20px]">smartphone</span>
+</div>
+<span class="font-label-md text-label-md font-medium text-primary">Samsung</span>
+</button>
+<button class="flex flex-col items-center justify-center min-w-[72px] h-[86px] rounded-xl bg-surface-container-lowest shadow-sm hover:bg-surface-container-low transition-all active:scale-95" type="button">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary mb-1.5">
+<span class="material-symbols-outlined text-[20px]">devices</span>
+</div>
+<span class="font-label-md text-label-md font-medium text-primary">Xiaomi</span>
+</button>
+<button class="flex flex-col items-center justify-center min-w-[72px] h-[86px] rounded-xl bg-surface-container-lowest shadow-sm hover:bg-surface-container-low transition-all active:scale-95" type="button">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary mb-1.5">
+<span class="material-symbols-outlined text-[20px]">mobile_friendly</span>
+</div>
+<span class="font-label-md text-label-md font-medium text-primary">OPPO</span>
+</button>
+<button class="flex flex-col items-center justify-center min-w-[72px] h-[86px] rounded-xl bg-surface-container-lowest shadow-sm hover:bg-surface-container-low transition-all active:scale-95" type="button">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary mb-1.5">
+<span class="material-symbols-outlined text-[20px]">screen_rotation</span>
+</div>
+<span class="font-label-md text-label-md font-medium text-primary">Vivo</span>
+</button>
+<button class="flex flex-col items-center justify-center min-w-[72px] h-[86px] rounded-xl bg-surface-container-lowest shadow-sm hover:bg-surface-container-low transition-all active:scale-95" type="button">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary mb-1.5">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<span class="font-label-md text-label-md font-medium text-primary">OnePlus</span>
+</button>
+</div>
+</div>
+<div class="px-margin my-3">
+<div class="rounded-xl bg-gradient-to-r from-surface-container-low via-surface-container to-surface-container-low p-4 shadow-sm flex items-center justify-between">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[22px]">sell</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg font-bold text-primary">Sell Your Phone</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.2 rounded bg-secondary-fixed text-on-secondary-fixed font-semibold">Instant Escrow</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">List in 2 minutes with verified IMEI certificate &amp; zero scam risk.</p>
+</div>
+</div>
+<a class="w-9 h-9 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center text-secondary hover:bg-secondary hover:text-on-secondary transition-colors flex-shrink-0 ml-2" data-path="sell" href="#">
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="px-margin mt-4">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight">Featured Verified Phones</h3>
+<span class="material-symbols-outlined text-[18px] text-secondary">verified</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-medium">100% Inspected</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-3.5 flex flex-col transition-all hover:shadow-md">
+<div class="flex gap-3">
+<div class="w-24 h-24 rounded-lg bg-surface-container overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="High quality studio photography of Apple iPhone 14 Pro in Deep Purple color lying on a pristine white architectural stone pedestal with soft diffuse daylight studio lighting, ultra clean product photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYIDqSj1b2sylOFAfvheuVdteBKKOlUqPkaWVS60pnIyhacptKo5udYjKxBtbBVYV83xaAUKCkQsb4BgE_fsCyDUseW6MBeGL3eKB6g_JTKY5T6HbKQVFF5UuJxbc7zrY5xURNYqCZlVPKJDv4nUiBXNyTVqpMC9NX3HCvmYzlO-MKuCCxveiA-l_r0ml2kXkoaECfnqzhpOuycE4kshJDqmAF0cgRLLu8mIkSqUmpOL5H38EdI0YRVQ"/>
+<span class="absolute top-1 left-1 bg-primary/80 backdrop-blur-xs text-on-primary font-label-sm text-label-sm px-1.5 py-0.5 rounded font-medium">9.5/10</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h4 class="font-label-lg text-label-lg font-bold text-primary truncate">iPhone 14 Pro 128GB</h4>
+<button aria-label="Bookmark iPhone 14 Pro" class="text-outline hover:text-error transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Deep Purple • Like New</p>
+</div>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-label-sm text-label-sm text-secondary font-bold">PKR</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">245,000</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<div class="flex items-center gap-1 bg-surface-container-low px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px] text-on-surface-variant">battery_charging_full</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">91%</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">PTA Approved</span>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-2.5 bg-surface-bright rounded-lg p-2 flex items-center justify-between">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-[15px] text-secondary">store</span>
+<span class="font-label-sm text-label-sm text-primary font-medium truncate">Hamza Tech (Hafeez Centre, LHR)</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed flex-shrink-0">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+<span class="font-label-sm text-label-sm font-semibold">Registry Verified</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-3.5 flex flex-col transition-all hover:shadow-md">
+<div class="flex gap-3">
+<div class="w-24 h-24 rounded-lg bg-surface-container overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Close-up professional product shot of Samsung Galaxy S23 Ultra in Phantom Black showing sleek quad camera setup on a dark minimalist slate surface with gentle rim lighting, 8k resolution" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJe9TIWA4pAw4fT2-SDY0zN0NtD8tPgH6vynT9UDYnB7deTrG3jLG-VXnJY2VJe8zWQlLhH8wUUWuVykszL6eBfQOFwCNBeKzjT1k7n_YAYfgs1r3ectw-yYhICyRYztX2p8FF7JjDpdnvpN2Lx99XBlSOmoyVZPUrfaJDtFyN53_PPJTHCdXiHo8mW2PSd8fFlVhaBbZ7_I58UONRtQZrljeWIYw8Aqo8fs9HWGDk3Y_8K3bXtW6ddg"/>
+<span class="absolute top-1 left-1 bg-primary/80 backdrop-blur-xs text-on-primary font-label-sm text-label-sm px-1.5 py-0.5 rounded font-medium">Mint</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h4 class="font-label-lg text-label-lg font-bold text-primary truncate">Samsung Galaxy S23 Ultra</h4>
+<button aria-label="Bookmark Galaxy S23" class="text-outline hover:text-error transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Phantom Black • 256GB Dual SIM</p>
+</div>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-label-sm text-label-sm text-secondary font-bold">PKR</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">210,000</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<div class="flex items-center gap-1 bg-surface-container-low px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px] text-on-surface-variant">memory</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Snapdragon 8 Gen 2</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">PTA Official</span>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-2.5 bg-surface-bright rounded-lg p-2 flex items-center justify-between">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-[15px] text-secondary">person_pin</span>
+<span class="font-label-sm text-label-sm text-primary font-medium truncate">Usman M. (Saddar, Karachi)</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed flex-shrink-0">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+<span class="font-label-sm text-label-sm font-semibold">Registry Verified</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-3.5 flex flex-col transition-all hover:shadow-md">
+<div class="flex gap-3">
+<div class="w-24 h-24 rounded-lg bg-surface-container overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Refined crisp product photograph of Google Pixel 8 in Hazel grey finish resting angled on frosted glass surface with gentle geometric reflections in a contemporary light studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4YXtcCQ7oGhoRUn8yAsW9vjBK1BLYyzvzB3Ik8lImpUE6CgRYndxZNRc7lkM8ZdJROB_ZoV-HiblA2qxmPdnC4iAE_l54IQpgQ2p7h8yf9eLf5L-lRaRvw-Sdrf2AWXmSNDIyo31L9nDMRYAErFJzk3CoXEKu09Bv9Z6yVozTZVCly7CImMTzaT_crh1ZhWQB_TeJPbP4tUiqlV1ytsxzzDGRAGqq64zFsqB7oidtBDVkGVkn1iK_Aw"/>
+<span class="absolute top-1 left-1 bg-surface-container-highest text-primary font-label-sm text-label-sm px-1.5 py-0.5 rounded font-medium">8.5/10</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h4 class="font-label-lg text-label-lg font-bold text-primary truncate">Google Pixel 8 128GB</h4>
+<button aria-label="Bookmark Pixel 8" class="text-outline hover:text-error transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Hazel • Tensor G3 • Minor scuff</p>
+</div>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-label-sm text-label-sm text-secondary font-bold">PKR</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">155,000</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<div class="flex items-center gap-1 bg-surface-container-low px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px] text-on-surface-variant">camera</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Original Cam</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">PTA Approved</span>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-2.5 bg-surface-bright rounded-lg p-2 flex items-center justify-between">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-[15px] text-secondary">verified_user</span>
+<span class="font-label-sm text-label-sm text-primary font-medium truncate">Bilal Electronics (Blue Area, ISB)</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant flex-shrink-0">
+<span class="material-symbols-outlined text-[13px] text-secondary">policy</span>
+<span class="font-label-sm text-label-sm font-semibold">Police Cleared</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="px-margin my-6">
+<div class="rounded-xl bg-surface-container-low p-4 shadow-sm flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Why DeviceTrust?</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+        The only platform connected directly to federal IMEI whitelists, telecom carrier databases, and municipal police records.
+      </p>
+<div class="grid grid-cols-1 gap-2.5 mt-1">
+<div class="flex items-center gap-3 bg-surface-container-lowest p-2.5 rounded-lg shadow-sm">
+<div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[16px]">fingerprint</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-primary">100% IMEI Registry Checked</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dual-slot hardware verification against PTA DIRBS</span>
+</div>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-lowest p-2.5 rounded-lg shadow-sm">
+<div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[16px]">security</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-primary">Anti-Theft Protection</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Immediate cross-matching with CPLC theft blacklist</span>
+</div>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-lowest p-2.5 rounded-lg shadow-sm">
+<div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[16px]">handshake</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-primary">Seamless Ownership Handoff</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Digital legal transfer certificate generated on purchase</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="px-margin mb-4 text-center">
+<p class="font-mono-data text-mono-data text-outline">DeviceTrust Protocol v2.4.1 • Encrypted Node PK-LHR</p>
+</div>
+</div>
+<script>
+  (function() {
+    const searchInput = document.getElementById('marketplaceSearch');
+    if (searchInput) {
+      searchInput.addEventListener('focus', () => {
+        searchInput.parentElement.classList.add('shadow-md');
+      });
+      searchInput.addEventListener('blur', () => {
+        searchInput.parentElement.classList.remove('shadow-md');
+      });
+    }
+
+    const favButtons = document.querySelectorAll('button[aria-label^="Bookmark"]');
+    favButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon) {
+          const isFilled = icon.style.fontVariationSettings.includes("'FILL' 1");
+          if (isFilled) {
+            icon.style.fontVariationSettings = "'FILL' 0";
+    // IMEI Modal trigger
+    const imeiButtons = document.querySelectorAll('[data-path="check-imei"]');
+    const modal = document.getElementById('imeiVerificationModal');
+    imeiButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (modal) modal.classList.remove('hidden');
+      });
+    });
+  })();
+
+  function closeImeiModal() {
+    const modal = document.getElementById('imeiVerificationModal');
+    if (modal) modal.classList.add('hidden');
+  }
+
+  function simulateImeiCheck() {
+    const statusDiv = document.getElementById('imeiResult');
+    const input = document.getElementById('imeiInputField');
+    if (!input.value) input.value = "3569 8211 4092 881";
+    statusDiv.innerHTML = '<div class="flex items-center gap-2 text-secondary py-2"><span class="w-3 h-3 rounded-full bg-secondary animate-ping"></span><span class="text-xs">Querying PTA DIRBS & CPLC Blacklist...</span></div>';
+    setTimeout(() => {
+      statusDiv.innerHTML = `
+        <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex flex-col gap-1.5 animate-fadeIn">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-1 text-emerald-700 font-semibold text-xs uppercase tracking-wide">
+              <span class="material-symbols-outlined text-[16px]">verified</span> PTA Approved (DIRBS)
+            </span>
+            <span class="text-[10px] font-mono text-emerald-600">DUTY PAID</span>
+          </div>
+          <p class="text-xs text-emerald-900 font-medium">Apple iPhone 15 Pro Max 256GB • Natural Titanium</p>
+          <div class="text-[11px] text-emerald-700 flex items-center justify-between pt-1 border-t border-emerald-100">
+            <span>CPLC Theft DB: <strong>Clean (Zero Flags)</strong></span>
+            <span>Title: <strong>Transfer Ready</strong></span>
+          </div>
+        </div>
+      `;
+    }, 800);
+  }
+</script>
+
+<!-- Interactive IMEI Verification Modal -->
+<div id="imeiVerificationModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 transition-all">
+  <div class="w-full max-w-md bg-surface-container-lowest rounded-t-2xl sm:rounded-2xl p-5 shadow-2xl border border-surface-container max-h-[90vh] overflow-y-auto">
+    <div class="flex items-center justify-between pb-3 border-b border-surface-container">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-secondary text-[24px]">verified_user</span>
+        <div>
+          <h3 class="font-headline-md text-primary font-bold">PTA & CPLC IMEI Check</h3>
+          <p class="text-[11px] text-on-surface-variant">Instant National Telemetry Verification</p>
+        </div>
+      </div>
+      <button onclick="closeImeiModal()" class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-variant flex items-center justify-center text-on-surface-variant">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+    </div>
+
+    <div class="mt-4 flex flex-col gap-3">
+      <label class="text-xs font-semibold text-primary">Enter 15-Digit Hardware IMEI</label>
+      <div class="relative flex items-center">
+        <input id="imeiInputField" type="text" maxlength="18" placeholder="3569 8211 4092 881" value="3569 8211 4092 881" class="w-full h-11 pl-3 pr-10 rounded-xl bg-surface-container-low font-mono-imei text-sm text-primary border border-outline-variant focus:outline-none focus:border-secondary">
+        <button onclick="simulateImeiCheck()" class="absolute right-1 px-3 py-1.5 bg-secondary text-on-secondary rounded-lg text-xs font-medium hover:brightness-110">
+          Verify
+        </button>
+      </div>
+
+      <div id="imeiResult" class="min-h-[70px]">
+        <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex flex-col gap-1.5">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-1 text-emerald-700 font-semibold text-xs uppercase tracking-wide">
+              <span class="material-symbols-outlined text-[16px]">verified</span> PTA Approved (DIRBS)
+            </span>
+            <span class="text-[10px] font-mono text-emerald-600">DUTY PAID</span>
+          </div>
+          <p class="text-xs text-emerald-900 font-medium">Apple iPhone 15 Pro Max 256GB • Natural Titanium</p>
+          <div class="text-[11px] text-emerald-700 flex items-center justify-between pt-1 border-t border-emerald-100">
+            <span>CPLC Theft DB: <strong>Clean (Zero Flags)</strong></span>
+            <span>Title: <strong>Transfer Ready</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-2.5 bg-surface-container-low rounded-xl text-[11px] text-on-surface-variant flex items-start gap-2">
+        <span class="material-symbols-outlined text-secondary text-[16px] shrink-0 mt-0.5">info</span>
+        <span>Every device sold on DeviceTrust is cryptographically anchored to its official CPLC & PTA tax record.</span>
+      </div>
+
+      <button onclick="closeImeiModal()" class="w-full h-11 mt-1 bg-surface-container text-primary font-medium rounded-xl hover:bg-surface-variant transition-colors text-sm">
+        Done
+      </button>
+    </div>
+  </div>
+</div>
+</main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(16,35,63,0.06)]" data-active-classes="text-secondary font-semibold"><div class="flex items-center justify-around h-16 px-space-xs relative"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-12 transition-colors text-secondary font-semibold" data-path="home" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-label-sm text-label-sm mt-0.5">Home</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-on-surface transition-colors" data-path="explore" href="#"><span class="material-symbols-outlined text-[22px]">explore</span><span class="font-label-sm text-label-sm mt-0.5">Explore</span></a><div class="relative -top-4 flex flex-col items-center"><a class="flex items-center justify-center w-14 h-14 rounded-full bg-secondary text-on-secondary shadow-[0_8px_24px_-2px_rgba(36,107,253,0.36)] hover:brightness-110 active:scale-95 transition-all cursor-pointer" data-path="check-imei" href="#"><span class="material-symbols-outlined text-[26px]">verified_user</span></a><span class="font-label-sm text-label-sm text-on-surface-variant mt-1 font-medium">Check IMEI</span></div><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-on-surface transition-colors" data-path="sell" href="#"><span class="material-symbols-outlined text-[22px]">add_circle</span><span class="font-label-sm text-label-sm mt-0.5">Sell</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-on-surface transition-colors" data-path="profile" href="../devicetrust_login_registration/code.html"><span class="material-symbols-outlined text-[22px]">person</span><span class="font-label-sm text-label-sm mt-0.5">Profile</span></a></div></nav></body></html>

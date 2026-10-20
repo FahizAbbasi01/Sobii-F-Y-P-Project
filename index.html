@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeviceTrust • Mobile Marketplace Interactive Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#000d23',
+              navyContainer: '#10233f',
+              blue: '#0051d3',
+              blueContainer: '#226afc',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+              surface: '#f7f9fc'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.4);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.25);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.45);
+    }
+
+    /* Device Mockup Shell */
+    .device-shell {
+      box-shadow: 
+        0 0 0 12px #1e293b,
+        0 0 0 14px #334155,
+        0 25px 60px -15px rgba(0, 0, 0, 0.65),
+        0 0 80px -20px rgba(34, 106, 252, 0.2);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dynamic-island {
+      width: 120px;
+      height: 32px;
+      background: #000;
+      border-radius: 20px;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      pointer-events: none;
+    }
+
+    .home-bar {
+      width: 134px;
+      height: 5px;
+      background: #1e293b;
+      border-radius: 10px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 40;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-[#0b1329] text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-brand-blueContainer selection:text-white">
+
+  <!-- Top Studio Bar -->
+  <header class="sticky top-0 z-50 bg-[#0e172e]/90 backdrop-blur-md border-b border-slate-800/80 px-4 lg:px-6 py-2.5">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+      
+      <!-- Brand & Project Title -->
+      <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-navyContainer via-brand-blue to-brand-blueContainer flex items-center justify-center shadow-lg shadow-blue-500/20 text-white font-bold text-lg">
+            <span class="material-symbols-outlined text-[20px]">verified_user</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-base tracking-tight text-white">DeviceTrust</span>
+              <span class="text-[10px] font-mono uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded font-semibold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Localhost:3000
+              </span>
+            </div>
+            <p class="text-xs text-slate-400 font-normal">Mobile Marketplace & Provenance Registry</p>
+          </div>
+        </div>
+
+        <!-- Mobile Screen Switcher Dropdown (visible on small viewports) -->
+        <select id="mobileScreenSelect" onchange="switchScreen(this.value)" class="md:hidden bg-slate-800 border border-slate-700 text-xs rounded-lg px-2.5 py-1.5 text-slate-200">
+          <option value="splash">🚀 Splash</option>
+          <option value="onboarding">🧭 Onboarding</option>
+          <option value="login">🔐 Login / Register</option>
+          <option value="home" selected>🛍️ Home Marketplace</option>
+          <option value="design">🎨 Design Tokens</option>
+        </select>
+      </div>
+
+      <!-- Desktop Screen Tabs -->
+      <nav class="hidden md:flex items-center gap-1 bg-slate-900/80 p-1 rounded-xl border border-slate-800">
+        <button onclick="switchScreen('splash')" id="tab-splash" class="screen-tab flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[16px]">bolt</span>
+          <span>1. Splash</span>
+        </button>
+        <button onclick="switchScreen('onboarding')" id="tab-onboarding" class="screen-tab flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[16px]">explore</span>
+          <span>2. Onboarding</span>
+        </button>
+        <button onclick="switchScreen('login')" id="tab-login" class="screen-tab flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[16px]">lock</span>
+          <span>3. Login / Register</span>
+        </button>
+        <button onclick="switchScreen('home')" id="tab-home" class="screen-tab active-tab flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-blueContainer text-white shadow-sm transition-all">
+          <span class="material-symbols-outlined text-[16px]">storefront</span>
+          <span>4. Marketplace Home</span>
+        </button>
+        <button onclick="toggleDesignModal(true)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-indigo-300 hover:text-white hover:bg-indigo-500/20 transition-all border border-indigo-500/20">
+          <span class="material-symbols-outlined text-[16px]">palette</span>
+          <span>Design Specs</span>
+        </button>
+      </nav>
+
+      <!-- Viewport & Action Controls -->
+      <div class="flex items-center gap-2">
+        
+        <!-- Device Preset -->
+        <div class="flex items-center bg-slate-900 border border-slate-800 rounded-lg p-0.5 text-xs">
+          <button onclick="setDevicePreset('iphone15')" id="btn-iphone15" title="iPhone 15 Pro (393 × 852)" class="device-btn px-2.5 py-1 rounded bg-slate-800 text-white font-medium transition-all">
+            iPhone 15
+          </button>
+          <button onclick="setDevicePreset('pixel8')" id="btn-pixel8" title="Google Pixel 8 (412 × 915)" class="device-btn px-2.5 py-1 rounded text-slate-400 hover:text-white font-medium transition-all">
+            Pixel 8
+          </button>
+          <button onclick="setDevicePreset('responsive')" id="btn-responsive" title="Full Screen Responsive View" class="device-btn px-2.5 py-1 rounded text-slate-400 hover:text-white font-medium transition-all">
+            Fluid
+          </button>
+        </div>
+
+        <!-- Zoom Scale -->
+        <select id="scaleSelect" onchange="setScale(this.value)" class="bg-slate-900 border border-slate-800 text-xs rounded-lg px-2 py-1.5 text-slate-300 focus:outline-none hidden sm:block">
+          <option value="0.8">80%</option>
+          <option value="0.9">90%</option>
+          <option value="1" selected>100%</option>
+        </select>
+
+        <!-- Reload Frame -->
+        <button onclick="reloadActiveScreen()" title="Reload Screen (R)" class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-slate-800 flex items-center justify-center text-slate-300 hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[18px]">refresh</span>
+        </button>
+
+        <!-- Open Direct in New Tab -->
+        <a id="openExternalLink" href="/home" target="_blank" title="Open Screen in New Tab" class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-brand-blueContainer hover:border-brand-blueContainer flex items-center justify-center text-slate-300 hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Workspace Canvas -->
+  <main class="flex-1 flex flex-col items-center justify-center p-4 lg:p-8 relative overflow-x-hidden">
+    
+    <!-- Background Ambient Glows -->
+    <div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Active Screen Breadcrumb & URL Pill -->
+    <div class="mb-5 flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-full px-4 py-1.5 text-xs text-slate-400 shadow-sm z-10">
+      <span class="text-slate-500 font-mono">Screen URL:</span>
+      <span id="currentUrlDisplay" class="font-mono text-blue-400 font-medium">/stitch_devicetrust_mobile_marketplace_ui/devicetrust_home_marketplace/code.html</span>
+      <button onclick="copyCurrentUrl()" title="Copy URL" class="text-slate-400 hover:text-white ml-1">
+        <span class="material-symbols-outlined text-[14px]">content_copy</span>
+      </button>
+    </div>
+
+    <!-- Phone Simulator Shell -->
+    <div id="deviceContainer" class="relative z-10 transition-all duration-300 origin-top" style="transform: scale(1);">
+      
+      <div id="phoneShell" class="device-shell relative bg-black rounded-[50px] overflow-hidden border-[4px] border-[#2b3547]" style="width: 393px; height: 852px;">
+        
+        <!-- Top Status Bar Bar & Dynamic Island -->
+        <div id="phoneHeaderOverlay" class="absolute top-0 inset-x-0 h-11 z-30 pointer-events-none flex items-center justify-between px-6 pt-1 text-white text-[12px] font-semibold">
+          <span id="clockDisplay" class="font-medium">9:41</span>
+          
+          <!-- Dynamic Island -->
+          <div class="dynamic-island">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+            <span class="text-[9px] font-mono text-slate-300">DIRBS</span>
+          </div>
+
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[14px]">signal_cellular_alt</span>
+            <span class="material-symbols-outlined text-[14px]">wifi</span>
+            <div class="w-5 h-2.5 border border-white/80 rounded-sm p-0.5 flex items-center">
+              <div class="w-full h-full bg-emerald-400 rounded-2xs"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Screen Iframe -->
+        <iframe 
+          id="screenFrame" 
+          src="stitch_devicetrust_mobile_marketplace_ui/devicetrust_home_marketplace/code.html" 
+          class="w-full h-full border-0 bg-white"
+          title="DeviceTrust Screen Preview">
+        </iframe>
+
+        <!-- Bottom Home Indicator -->
+        <div id="phoneFooterOverlay" class="home-bar"></div>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom Journey Navigation Stepper -->
+    <div class="mt-8 z-10 bg-slate-900/90 border border-slate-800 rounded-2xl p-2.5 px-4 shadow-xl flex items-center gap-3 max-w-full overflow-x-auto">
+      <span class="text-xs font-semibold text-slate-400 whitespace-nowrap">User Journey:</span>
+      
+      <button onclick="switchScreen('splash')" class="step-chip flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs bg-slate-800/80 hover:bg-slate-800 text-slate-300 whitespace-nowrap">
+        <span class="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-[10px] font-bold">1</span>
+        <span>Splash</span>
+      </button>
+
+      <span class="text-slate-600 text-xs">➔</span>
+
+      <button onclick="switchScreen('onboarding')" class="step-chip flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs bg-slate-800/80 hover:bg-slate-800 text-slate-300 whitespace-nowrap">
+        <span class="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-[10px] font-bold">2</span>
+        <span>Onboarding</span>
+      </button>
+
+      <span class="text-slate-600 text-xs">➔</span>
+
+      <button onclick="switchScreen('login')" class="step-chip flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs bg-slate-800/80 hover:bg-slate-800 text-slate-300 whitespace-nowrap">
+        <span class="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center text-[10px] font-bold">3</span>
+        <span>Auth / Register</span>
+      </button>
+
+      <span class="text-slate-600 text-xs">➔</span>
+
+      <button onclick="switchScreen('home')" class="step-chip flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs bg-brand-blueContainer text-white font-medium whitespace-nowrap">
+        <span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[10px] font-bold">4</span>
+        <span>Marketplace Home</span>
+      </button>
+    </div>
+
+    <!-- Keyboard Hint -->
+    <div class="mt-3 text-[11px] text-slate-500 flex items-center gap-3">
+      <span>Tip: Press keys <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300">1</kbd> - <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300">4</kbd> to jump screens</span>
+      <span>•</span>
+      <span>Press <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300">R</kbd> to reload</span>
+    </div>
+
+  </main>
+
+  <!-- Design Specs Modal -->
+  <div id="designModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#0f172a] border border-slate-800 rounded-2xl w-full max-w-3xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[20px]">palette</span>
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-white">DeviceTrust Design Tokens & Specification</h2>
+            <p class="text-xs text-slate-400">Extracted from devicetrust_mobile_registry/DESIGN.md</p>
+          </div>
+        </div>
+        <button onclick="toggleDesignModal(false)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto space-y-6 text-sm text-slate-300">
+        
+        <!-- Color Architecture -->
+        <div>
+          <h3 class="text-xs uppercase font-bold tracking-wider text-slate-400 mb-3">Color Architecture (Fintech Precision)</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg shadow" style="background-color: #000d23;"></div>
+              <div>
+                <div class="text-xs font-semibold text-white">Deep Navy</div>
+                <div class="text-[11px] font-mono text-slate-400">#000d23</div>
+                <div class="text-[10px] text-slate-500">Primary Anchor</div>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg shadow" style="background-color: #226afc;"></div>
+              <div>
+                <div class="text-xs font-semibold text-white">Electric Blue</div>
+                <div class="text-[11px] font-mono text-slate-400">#226afc</div>
+                <div class="text-[10px] text-slate-500">Key Accent</div>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg shadow" style="background-color: #10b981;"></div>
+              <div>
+                <div class="text-xs font-semibold text-white">PTA Verified Green</div>
+                <div class="text-[11px] font-mono text-slate-400">#10b981</div>
+                <div class="text-[10px] text-slate-500">DIRBS / Clean</div>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg shadow" style="background-color: #f59e0b;"></div>
+              <div>
+                <div class="text-xs font-semibold text-white">Amber Audit</div>
+                <div class="text-[11px] font-mono text-slate-400">#f59e0b</div>
+                <div class="text-[10px] text-slate-500">Pending Review</div>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg shadow" style="background-color: #ef4444;"></div>
+              <div>
+                <div class="text-xs font-semibold text-white">Crimson Alert</div>
+                <div class="text-[11px] font-mono text-slate-400">#ef4444</div>
+                <div class="text-[10px] text-slate-500">Blacklisted / Stolen</div>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg shadow border border-slate-700" style="background-color: #f7f9fc;"></div>
+              <div>
+                <div class="text-xs font-semibold text-white">Canvas Surface</div>
+                <div class="text-[11px] font-mono text-slate-400">#f7f9fc</div>
+                <div class="text-[10px] text-slate-500">Neutral Base</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Typography -->
+        <div>
+          <h3 class="text-xs uppercase font-bold tracking-wider text-slate-400 mb-2">Typography Rules</h3>
+          <ul class="space-y-1.5 text-xs text-slate-300 list-disc list-inside bg-slate-900/60 p-3.5 rounded-xl border border-slate-800">
+            <li><strong>Inter</strong>: All structural consumer-facing UI, labels, headings, and descriptions.</li>
+            <li><strong>JetBrains Mono</strong>: Cryptographic & telemetry details, 15-digit quad IMEIs (<code class="font-mono text-blue-300">3569 8211 4092 881</code>).</li>
+            <li><strong>Price Formatting</strong>: Strict Pakistani Rupee format (<code class="font-mono text-emerald-400">PKR 245,000</code>).</li>
+          </ul>
+        </div>
+
+        <!-- Regional Specifications -->
+        <div>
+          <h3 class="text-xs uppercase font-bold tracking-wider text-slate-400 mb-2">Regional Integration Hubs</h3>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-200">Lahore • Hafeez Centre & Hall Road</span>
+            <span class="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-200">Karachi • Saddar & Star City</span>
+            <span class="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-200">Islamabad • Blue Area</span>
+            <span class="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-200">PTA DIRBS Live Telemetry</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-3 border-t border-slate-800 bg-slate-900/50 flex justify-end">
+        <button onclick="toggleDesignModal(false)" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-semibold">
+          Close Specs
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const SCREENS = {
+      splash: {
+        title: 'Splash Screen',
+        path: 'stitch_devicetrust_mobile_marketplace_ui/devicetrust_splash_screen/code.html',
+        alias: '/splash'
+      },
+      onboarding: {
+        title: 'Onboarding Walkthrough',
+        path: 'stitch_devicetrust_mobile_marketplace_ui/devicetrust_onboarding/code.html',
+        alias: '/onboarding'
+      },
+      login: {
+        title: 'Login & Registration',
+        path: 'stitch_devicetrust_mobile_marketplace_ui/devicetrust_login_registration/code.html',
+        alias: '/login'
+      },
+      home: {
+        title: 'Home Marketplace',
+        path: 'stitch_devicetrust_mobile_marketplace_ui/devicetrust_home_marketplace/code.html',
+        alias: '/home'
+      }
+    };
+
+    let currentScreenKey = 'home';
+    let currentPreset = 'iphone15';
+
+    function switchScreen(key) {
+      if (key === 'design') {
+        toggleDesignModal(true);
+        return;
+      }
+
+      if (!SCREENS[key]) return;
+      currentScreenKey = key;
+      const screen = SCREENS[key];
+
+      // Update iframe source
+      const frame = document.getElementById('screenFrame');
+      frame.src = screen.path;
+
+      // Update display URL and direct link
+      document.getElementById('currentUrlDisplay').textContent = screen.alias;
+      document.getElementById('openExternalLink').href = screen.alias;
+
+      // Update desktop tab styles
+      document.querySelectorAll('.screen-tab').forEach(tab => {
+        tab.className = 'screen-tab flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition-all';
+      });
+      const activeTab = document.getElementById('tab-' + key);
+      if (activeTab) {
+        activeTab.className = 'screen-tab active-tab flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-blueContainer text-white shadow-sm transition-all';
+      }
+
+      // Update mobile selector
+      const mobileSelect = document.getElementById('mobileScreenSelect');
+      if (mobileSelect) mobileSelect.value = key;
+    }
+
+    function setDevicePreset(preset) {
+      currentPreset = preset;
+      const shell = document.getElementById('phoneShell');
+      const container = document.getElementById('deviceContainer');
+      const headerOverlay = document.getElementById('phoneHeaderOverlay');
+      const footerOverlay = document.getElementById('phoneFooterOverlay');
+
+      document.querySelectorAll('.device-btn').forEach(btn => {
+        btn.className = 'device-btn px-2.5 py-1 rounded text-slate-400 hover:text-white font-medium transition-all';
+      });
+      document.getElementById('btn-' + preset).className = 'device-btn px-2.5 py-1 rounded bg-slate-800 text-white font-medium transition-all';
+
+      if (preset === 'iphone15') {
+        shell.style.width = '393px';
+        shell.style.height = '852px';
+        shell.style.borderRadius = '50px';
+        shell.className = 'device-shell relative bg-black rounded-[50px] overflow-hidden border-[4px] border-[#2b3547]';
+        headerOverlay.style.display = 'flex';
+        footerOverlay.style.display = 'block';
+      } else if (preset === 'pixel8') {
+        shell.style.width = '412px';
+        shell.style.height = '915px';
+        shell.style.borderRadius = '38px';
+        shell.className = 'device-shell relative bg-black rounded-[38px] overflow-hidden border-[4px] border-[#2b3547]';
+        headerOverlay.style.display = 'flex';
+        footerOverlay.style.display = 'block';
+      } else if (preset === 'responsive') {
+        shell.style.width = '100vw';
+        shell.style.maxWidth = '600px';
+        shell.style.height = '88vh';
+        shell.style.borderRadius = '24px';
+        shell.className = 'relative bg-white rounded-2xl overflow-hidden shadow-2xl border border-slate-700';
+        headerOverlay.style.display = 'none';
+        footerOverlay.style.display = 'none';
+      }
+    }
+
+    function setScale(scaleVal) {
+      document.getElementById('deviceContainer').style.transform = `scale(${scaleVal})`;
+    }
+
+    function reloadActiveScreen() {
+      const frame = document.getElementById('screenFrame');
+      frame.contentWindow.location.reload();
+    }
+
+    function copyCurrentUrl() {
+      const alias = SCREENS[currentScreenKey].alias;
+      const fullUrl = window.location.origin + alias;
+      navigator.clipboard.writeText(fullUrl).then(() => {
+        const btn = document.getElementById('currentUrlDisplay');
+        const orig = btn.textContent;
+        btn.textContent = 'Copied to clipboard!';
+        setTimeout(() => { btn.textContent = orig; }, 1500);
+      });
+    }
+
+    function toggleDesignModal(show) {
+      const modal = document.getElementById('designModal');
+      if (show) modal.classList.remove('hidden');
+      else modal.classList.add('hidden');
+    }
+
+    // Live clock on phone status bar
+    function updateClock() {
+      const d = new Date();
+      let hours = d.getHours();
+      let minutes = d.getMinutes();
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      const el = document.getElementById('clockDisplay');
+      if (el) el.textContent = `${hours}:${minutes}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      if (e.key === '1') switchScreen('splash');
+      if (e.key === '2') switchScreen('onboarding');
+      if (e.key === '3') switchScreen('login');
+      if (e.key === '4') switchScreen('home');
+      if (e.key.toLowerCase() === 'r') reloadActiveScreen();
+    });
+  </script>
+</body>
+</html>

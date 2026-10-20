@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_blank" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "tertiary-fixed-dim": "#bdc7d8", "surface-container-lowest": "#ffffff", "secondary-fixed-dim": "#b3c5ff", "on-error-container": "#93000a", "on-tertiary-container": "#818b9b", "on-primary": "#ffffff", "tertiary-fixed": "#d9e3f4", "surface-tint": "#4d5f7e", "on-surface-variant": "#44474d", "tertiary-container": "#1a2430", "error-container": "#ffdad6", "on-secondary-fixed-variant": "#003ea6", "secondary-container": "#226afc", "secondary": "#0051d3", "on-secondary-container": "#fefcff", "primary-fixed": "#d6e3ff", "on-primary-fixed-variant": "#364765", "on-tertiary-fixed-variant": "#3e4755", "secondary-fixed": "#dbe1ff", "on-error": "#ffffff", "surface-container": "#eceef1", "surface-bright": "#f7f9fc", "outline": "#75777e", "on-primary-container": "#798bac", "error": "#ba1a1a", "inverse-on-surface": "#eff1f4", "surface-variant": "#e0e3e6", "surface-dim": "#d8dadd", "surface-container-highest": "#e0e3e6", "inverse-primary": "#b5c7eb", "surface-container-high": "#e6e8eb", "on-secondary-fixed": "#00174a", "on-primary-fixed": "#071b37", "outline-variant": "#c5c6ce", "surface": "#f7f9fc", "on-tertiary-fixed": "#121c28", "on-tertiary": "#ffffff", "on-background": "#191c1e", "background": "#f7f9fc", "primary": "#000d23", "inverse-surface": "#2d3133", "tertiary": "#050e1a", "on-surface": "#191c1e", "on-secondary": "#ffffff", "primary-fixed-dim": "#b5c7eb", "surface-container-low": "#f2f4f7", "primary-container": "#10233f" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "1rem", "gutter": "1rem", "space-md": "1rem", "space-xl": "2rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "space-xs": "0.25rem" }, "fontFamily": { "body-lg": ["Inter"], "label-md": ["Inter"], "mono-imei": ["JetBrains Mono"], "body-md": ["Inter"], "mono-data": ["JetBrains Mono"], "headline-lg": ["Inter"], "label-lg": ["Inter"], "label-sm": ["Inter"], "headline-xl": ["Inter"], "body-sm": ["Inter"], "headline-md": ["Inter"] }, "fontSize": { "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }], "mono-imei": ["15px", { "lineHeight": "20px", "fontWeight": "500" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "mono-data": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "headline-lg": ["22px", { "lineHeight": "28px", "fontWeight": "700" }], "label-lg": ["14px", { "lineHeight": "18px", "fontWeight": "600" }], "label-sm": ["10px", { "lineHeight": "14px", "fontWeight": "600" }], "headline-xl": ["28px", { "lineHeight": "34px", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "headline-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }] } } } }</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen pt-safe pb-safe"><main class="flex flex-col relative w-full bg-surface min-h-screen"><div class="flex flex-col w-full px-margin pb-space-xl">
+<!-- Subtle Trust Ambient Backdrop -->
+<div class="relative w-full pt-space-md pb-space-sm flex flex-col items-center text-center">
+<!-- Brand Visual Shield Accent -->
+<div class="relative mb-space-sm flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-secondary-fixed/50 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[32px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-surface-container-lowest rounded-full p-1 shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-[16px]">lock</span>
+</div>
+</div>
+<!-- Header Titles -->
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight" id="screen-heading">Welcome Back</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px] mt-space-xs leading-snug" id="screen-subtext">
+      Log in to verify devices, manage listings, and buy safely
+    </p>
+</div>
+<!-- Segmented Control Tab -->
+<div class="w-full bg-surface-container rounded-xl p-1 flex items-center mt-space-sm mb-space-lg shadow-sm">
+<button class="flex-1 py-2.5 rounded-lg font-label-lg text-label-lg transition-all duration-200 text-center bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center gap-1.5" id="tab-login" onclick="switchAuthMode('login')" type="button">
+<span class="material-symbols-outlined text-[18px]">key</span>
+<span>Phone / Email</span>
+</button>
+<button class="flex-1 py-2.5 rounded-lg font-label-lg text-label-lg transition-all duration-200 text-center text-on-surface-variant hover:text-on-surface flex items-center justify-center gap-1.5" id="tab-register" onclick="switchAuthMode('register')" type="button">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>Register New</span>
+</button>
+</div>
+<!-- Main Auth Interactive Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-md flex flex-col gap-space-md">
+<!-- Extra Registration Fields (Hidden in Login Mode) -->
+<div class="hidden flex flex-col gap-space-md" id="register-fields">
+<!-- Full Name -->
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface-variant" for="fullName">Full Legal Name</label>
+<div class="relative w-full h-[52px] bg-surface-container-low rounded-xl flex items-center px-space-md focus-within:bg-surface-container-lowest focus-within:shadow-sm transition-all duration-200">
+<span class="material-symbols-outlined text-outline text-[20px] mr-2">badge</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none" id="fullName" placeholder="As per CNIC (e.g. Muhammad Ali)" type="text"/>
+</div>
+</div>
+<!-- City Marketplace Cluster -->
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface-variant" for="regionalHub">Primary Marketplace Hub</label>
+<div class="relative w-full h-[52px] bg-surface-container-low rounded-xl flex items-center px-space-md focus-within:bg-surface-container-lowest focus-within:shadow-sm transition-all duration-200">
+<span class="material-symbols-outlined text-outline text-[20px] mr-2">location_on</span>
+<select class="w-full bg-transparent font-body-md text-body-md text-on-surface focus:outline-none appearance-none" id="regionalHub">
+<option value="lahore">Lahore • Hafeez Centre &amp; Hall Road</option>
+<option value="karachi">Karachi • Saddar &amp; Star City</option>
+<option value="islamabad">Islamabad • Blue Area</option>
+<option value="rawalpindi">Rawalpindi • Saddar Mobile Mall</option>
+<option value="other">Other Regulatory Regions</option>
+</select>
+<span class="material-symbols-outlined text-outline text-[20px] pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Phone Number Input with +92 Pak Prefix -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface-variant" for="phoneNumber">Mobile Phone Number</label>
+<span class="font-mono-data text-mono-data text-secondary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">sim_card</span> PTA Registered
+        </span>
+</div>
+<div class="relative w-full h-[52px] bg-surface-container-low rounded-xl flex items-center px-3 focus-within:bg-surface-container-lowest focus-within:shadow-sm transition-all duration-200">
+<!-- Pakistani Flag & Country Code Badge -->
+<div class="flex items-center gap-1.5 pr-2 mr-2 bg-surface-container rounded-lg py-1 px-2 shrink-0">
+<!-- Simplified SVG Flag of Pakistan -->
+<svg aria-label="Pakistan Flag" class="w-5 h-3.5 rounded-sm overflow-hidden shrink-0 shadow-sm" viewbox="0 0 900 600">
+<rect fill="#01411C" height="600" width="900"></rect>
+<rect fill="#FFFFFF" height="600" width="225"></rect>
+<circle cx="560" cy="300" fill="#FFFFFF" r="150"></circle>
+<circle cx="600" cy="275" fill="#01411C" r="140"></circle>
+<polygon fill="#FFFFFF" points="590,195 600,230 635,220 608,245 628,275 595,260 575,290 575,255 540,245 572,230"></polygon>
+</svg>
+<span class="font-mono-imei text-mono-imei text-on-surface font-semibold">+92</span>
+</div>
+<!-- Phone Input -->
+<input class="w-full bg-transparent font-mono-imei text-mono-imei text-on-surface placeholder:text-outline focus:outline-none" id="phoneNumber" inputmode="numeric" maxlength="11" placeholder="300 1234567" type="tel"/>
+<button aria-label="Scan SIM or QR barcode" class="p-1 rounded-lg text-outline hover:text-secondary hover:bg-surface-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">qr_code_scanner</span>
+</button>
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface-variant" for="passwordField">Password</label>
+<button class="font-label-md text-label-md text-secondary hover:underline transition-colors" id="btn-forgot-pass" onclick="triggerForgotPassword()" type="button">
+          Forgot Password?
+        </button>
+</div>
+<div class="relative w-full h-[52px] bg-surface-container-low rounded-xl flex items-center px-space-md focus-within:bg-surface-container-lowest focus-within:shadow-sm transition-all duration-200">
+<span class="material-symbols-outlined text-outline text-[20px] mr-2">lock</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none" id="passwordField" placeholder="••••••••••••" type="password"/>
+<button aria-label="Toggle password visibility" class="p-1.5 rounded-lg text-outline hover:text-on-surface transition-colors" id="togglePasswordBtn" onclick="togglePasswordVisibility()" type="button">
+<span class="material-symbols-outlined text-[20px]" id="eyeIcon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Terms Checkbox (Visible in Register Mode) -->
+<div class="hidden items-start gap-2.5 pt-1" id="register-terms">
+<input class="mt-1 w-4 h-4 rounded text-secondary accent-secondary focus:ring-0 cursor-pointer" id="termsCheck" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface-variant leading-snug" for="termsCheck">
+        I acknowledge compliance with <span class="text-secondary font-medium">PTA DIRBS Regulations</span> and agree to internal ownership audit logs.
+      </label>
+</div>
+<!-- Primary Action Button: Log In with DeviceTrust -->
+<button class="w-full h-[48px] bg-secondary hover:bg-secondary-container active:scale-[0.99] text-on-secondary rounded-xl font-label-lg text-label-lg shadow-md flex items-center justify-center gap-2 transition-all duration-150 mt-1" id="submit-auth-btn" onclick="handleAuthSubmit()" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+<span id="submit-btn-text">Log In with DeviceTrust</span>
+</button>
+<!-- Alternative OTP Quick Sign-in Button -->
+<button class="w-full h-[44px] bg-surface-container-low hover:bg-surface-container text-on-surface rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 transition-colors active:scale-[0.99]" onclick="handleOtpLogin()" type="button">
+<span class="material-symbols-outlined text-secondary text-[18px]">sms</span>
+<span>Request 6-Digit WhatsApp / SMS Code</span>
+</button>
+</div>
+<!-- Divider Section -->
+<div class="relative my-space-lg flex items-center justify-center">
+<div class="w-full h-px bg-surface-variant"></div>
+<span class="absolute bg-surface px-3 font-label-sm text-label-sm text-on-surface-variant tracking-wider uppercase">
+      or continue with secure OTP
+    </span>
+</div>
+<!-- Institutional One-Tap Google & Secondary SSO -->
+<div class="flex flex-col gap-space-sm w-full">
+<!-- One-Tap Google Sign-In button with Google G logo -->
+<button class="w-full h-[48px] bg-surface-container-lowest hover:bg-surface-container-low active:scale-[0.99] text-on-surface rounded-xl font-label-lg text-label-lg shadow-sm flex items-center justify-center gap-3 transition-all duration-150" onclick="handleGoogleAuth()" type="button">
+<!-- Crisp Official Multi-color Google SVG -->
+<svg aria-label="Google logo" class="w-5 h-5 shrink-0" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"></path>
+</svg>
+<span>Continue with Google</span>
+</button>
+</div>
+<!-- Security Protocol & Cryptographic Badge -->
+<div class="mt-space-lg w-full bg-surface-container-low rounded-xl p-3 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container-lowest flex items-center justify-center shrink-0 text-secondary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Bank-Grade Escrow Ready</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant">Secured by 256-bit Encryption &amp; Registry ID</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">check_circle</span>
+</div>
+<!-- Bottom Toggle Prompt -->
+<div class="mt-space-lg mb-space-sm text-center flex items-center justify-center gap-1.5">
+<span class="font-body-md text-body-md text-on-surface-variant" id="footer-prompt-text">Don't have an account?</span>
+<button class="font-label-lg text-label-lg text-secondary hover:underline transition-colors focus:outline-none" id="footer-toggle-btn" onclick="toggleAuthModeAlternative()" type="button">
+      Create an Account
+    </button>
+</div>
+</div>
+<script>
+  let currentAuthMode = 'login';
+
+  function switchAuthMode(mode) {
+    currentAuthMode = mode;
+    const tabLogin = document.getElementById('tab-login');
+    const tabRegister = document.getElementById('tab-register');
+    const registerFields = document.getElementById('register-fields');
+    const registerTerms = document.getElementById('register-terms');
+    const heading = document.getElementById('screen-heading');
+    const subtext = document.getElementById('screen-subtext');
+    const submitBtnText = document.getElementById('submit-btn-text');
+    const forgotPassBtn = document.getElementById('btn-forgot-pass');
+    const footerPrompt = document.getElementById('footer-prompt-text');
+    const footerToggleBtn = document.getElementById('footer-toggle-btn');
+
+    if (mode === 'login') {
+      // Style Active Login Tab
+      tabLogin.className = "flex-1 py-2.5 rounded-lg font-label-lg text-label-lg transition-all duration-200 text-center bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center gap-1.5";
+      tabRegister.className = "flex-1 py-2.5 rounded-lg font-label-lg text-label-lg transition-all duration-200 text-center text-on-surface-variant hover:text-on-surface flex items-center justify-center gap-1.5";
+
+      registerFields.classList.add('hidden');
+      registerTerms.classList.add('hidden');
+      registerTerms.classList.remove('flex');
+      forgotPassBtn.classList.remove('hidden');
+
+      heading.innerText = 'Welcome Back';
+      subtext.innerText = 'Log in to verify devices, manage listings, and buy safely';
+      submitBtnText.innerText = 'Log In with DeviceTrust';
+      footerPrompt.innerText = "Don't have an account?";
+      footerToggleBtn.innerText = 'Create an Account';
+    } else {
+      // Style Active Register Tab
+      tabRegister.className = "flex-1 py-2.5 rounded-lg font-label-lg text-label-lg transition-all duration-200 text-center bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center gap-1.5";
+      tabLogin.className = "flex-1 py-2.5 rounded-lg font-label-lg text-label-lg transition-all duration-200 text-center text-on-surface-variant hover:text-on-surface flex items-center justify-center gap-1.5";
+
+      registerFields.classList.remove('hidden');
+      registerTerms.classList.remove('hidden');
+      registerTerms.classList.add('flex');
+      forgotPassBtn.classList.add('hidden');
+
+      heading.innerText = 'Join DeviceTrust';
+      subtext.innerText = 'Create your verified device trader profile with national IMEI safeguard';
+      submitBtnText.innerText = 'Create Verified Account';
+      footerPrompt.innerText = 'Already have a registered account?';
+      footerToggleBtn.innerText = 'Sign In Instead';
+    }
+  }
+
+  function toggleAuthModeAlternative() {
+    switchAuthMode(currentAuthMode === 'login' ? 'register' : 'login');
+  }
+
+  function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('passwordField');
+    const eyeIcon = document.getElementById('eyeIcon');
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      eyeIcon.innerText = 'visibility_off';
+    } else {
+      passwordInput.type = 'password';
+      eyeIcon.innerText = 'visibility';
+    }
+  }
+
+  function handleAuthSubmit() {
+    const phoneInput = document.getElementById('phoneNumber');
+    const btnText = document.getElementById('submit-btn-text');
+    const originalText = btnText.innerText;
+
+    btnText.innerText = currentAuthMode === 'login' ? 'Verifying Registry...' : 'Registering Device Identity...';
+    setTimeout(() => {
+      btnText.innerText = originalText;
+      window.location.href = '../devicetrust_home_marketplace/code.html';
+    }, 800);
+  }
+
+  function handleOtpLogin() {
+    const phone = document.getElementById('phoneNumber');
+    if (!phone.value) {
+      phone.focus();
+      phone.placeholder = 'Enter 10-digit number first';
+      return;
+    }
+    alert('6-digit verification OTP requested for +92 ' + phone.value + '\nRedirecting to Marketplace...');
+    setTimeout(() => {
+      window.location.href = '../devicetrust_home_marketplace/code.html';
+    }, 600);
+  }
+
+  function handleGoogleAuth() {
+    console.log('Initiating One-Tap Google Identity Provider handshake...');
+    window.location.href = '../devicetrust_home_marketplace/code.html';
+  }
+
+  function triggerForgotPassword() {
+    alert('Password reset link sent to your registered SMS and email recovery options.');
+  }
+</script></main></body></html>
