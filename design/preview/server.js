@@ -4,7 +4,7 @@ const path = require('path');
 const url = require('url');
 
 const DEFAULT_PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
-const ROOT_DIR = __dirname;
+const ROOT_DIR = path.join(__dirname, '..');
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -25,14 +25,14 @@ const MIME_TYPES = {
 };
 
 const ROUTE_ALIASES = {
-  '/': '/index.html',
-  '/splash': '/stitch_devicetrust_mobile_marketplace_ui/devicetrust_splash_screen/code.html',
-  '/onboarding': '/stitch_devicetrust_mobile_marketplace_ui/devicetrust_onboarding/code.html',
-  '/login': '/stitch_devicetrust_mobile_marketplace_ui/devicetrust_login_registration/code.html',
-  '/auth': '/stitch_devicetrust_mobile_marketplace_ui/devicetrust_login_registration/code.html',
-  '/home': '/stitch_devicetrust_mobile_marketplace_ui/devicetrust_home_marketplace/code.html',
-  '/marketplace': '/stitch_devicetrust_mobile_marketplace_ui/devicetrust_home_marketplace/code.html',
-  '/design': '/stitch_devicetrust_mobile_marketplace_ui/devicetrust_mobile_registry/DESIGN.md'
+  '/': '/preview/index.html',
+  '/splash': '/stitch/devicetrust_splash_screen/code.html',
+  '/onboarding': '/stitch/devicetrust_onboarding/code.html',
+  '/login': '/stitch/devicetrust_login_registration/code.html',
+  '/auth': '/stitch/devicetrust_login_registration/code.html',
+  '/home': '/stitch/devicetrust_home_marketplace/code.html',
+  '/marketplace': '/stitch/devicetrust_home_marketplace/code.html',
+  '/design': '/stitch/devicetrust_mobile_registry/DESIGN.md'
 };
 
 const server = http.createServer((req, res) => {

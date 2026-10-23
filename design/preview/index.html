@@ -195,7 +195,7 @@
     <!-- Active Screen Breadcrumb & URL Pill -->
     <div class="mb-5 flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-full px-4 py-1.5 text-xs text-slate-400 shadow-sm z-10">
       <span class="text-slate-500 font-mono">Screen URL:</span>
-      <span id="currentUrlDisplay" class="font-mono text-blue-400 font-medium">/stitch_devicetrust_mobile_marketplace_ui/devicetrust_home_marketplace/code.html</span>
+      <span id="currentUrlDisplay" class="font-mono text-blue-400 font-medium">/stitch/devicetrust_home_marketplace/code.html</span>
       <button onclick="copyCurrentUrl()" title="Copy URL" class="text-slate-400 hover:text-white ml-1">
         <span class="material-symbols-outlined text-[14px]">content_copy</span>
       </button>
@@ -228,7 +228,7 @@
         <!-- The Screen Iframe -->
         <iframe 
           id="screenFrame" 
-          src="stitch_devicetrust_mobile_marketplace_ui/devicetrust_home_marketplace/code.html" 
+          src="/stitch/devicetrust_home_marketplace/code.html" 
           class="w-full h-full border-0 bg-white"
           title="DeviceTrust Screen Preview">
         </iframe>
@@ -395,22 +395,22 @@
     const SCREENS = {
       splash: {
         title: 'Splash Screen',
-        path: 'stitch_devicetrust_mobile_marketplace_ui/devicetrust_splash_screen/code.html',
+        path: '/stitch/devicetrust_splash_screen/code.html',
         alias: '/splash'
       },
       onboarding: {
         title: 'Onboarding Walkthrough',
-        path: 'stitch_devicetrust_mobile_marketplace_ui/devicetrust_onboarding/code.html',
+        path: '/stitch/devicetrust_onboarding/code.html',
         alias: '/onboarding'
       },
       login: {
         title: 'Login & Registration',
-        path: 'stitch_devicetrust_mobile_marketplace_ui/devicetrust_login_registration/code.html',
+        path: '/stitch/devicetrust_login_registration/code.html',
         alias: '/login'
       },
       home: {
         title: 'Home Marketplace',
-        path: 'stitch_devicetrust_mobile_marketplace_ui/devicetrust_home_marketplace/code.html',
+        path: '/stitch/devicetrust_home_marketplace/code.html',
         alias: '/home'
       }
     };
