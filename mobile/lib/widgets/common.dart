@@ -23,6 +23,9 @@ class AppCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final content = Padding(padding: padding, child: child);
+    final body = accent == null
+        ? content
+        : Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [Container(height: 4, color: accent), content]);
     return Container(
       margin: margin,
       decoration: BoxDecoration(
@@ -32,14 +35,11 @@ class AppCard extends StatelessWidget {
         boxShadow: AppShadows.card,
       ),
       clipBehavior: Clip.antiAlias,
+      // Only tappable cards get an InkWell; otherwise buttons inside the card stay
+      // separately reachable (and accessible to TalkBack / screen readers).
       child: Material(
         color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
-          child: accent == null
-              ? content
-              : Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [Container(height: 4, color: accent), content]),
-        ),
+        child: onTap == null ? body : InkWell(onTap: onTap, child: body),
       ),
     );
   }
