@@ -11,12 +11,31 @@ STEP=0
 shot() { adb exec-out screencap -p > "$OUT/$1.png"; echo "screenshot: $1" | tee -a "$OUT/steps.txt"; }
 log() { echo "$*" | tee -a "$OUT/steps.txt"; }
 
+# Emulator system apps sometimes show "X isn't responding" dialogs; press "Wait" and carry on.
+dismiss_system_dialogs() {
+  if grep -q "isn't responding" "$OUT/ui.xml" 2>/dev/null; then
+    local xy
+    xy=$(python3 - "$OUT/ui.xml" <<'PY'
+import re, sys, xml.etree.ElementTree as ET
+root = ET.parse(sys.argv[1]).getroot()
+for n in root.iter('node'):
+    if (n.get('text') or '').strip().lower() == 'wait':
+        x1, y1, x2, y2 = map(int, re.findall(r'\d+', n.get('bounds')))
+        print((x1 + x2) // 2, (y1 + y2) // 2)
+        break
+PY
+)
+    [ -n "$xy" ] && adb shell input tap $xy && log "dismissed a system 'isn't responding' dialog" && sleep 2
+  fi
+}
+
 # tap_text "label" : find a node whose text/content-desc contains label and tap its centre.
 tap_text() {
   local label="$1"
   for i in $(seq 1 30); do
     adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
     adb pull /sdcard/ui.xml "$OUT/ui.xml" >/dev/null 2>&1
+    dismiss_system_dialogs
     local xy
     xy=$(python3 - "$OUT/ui.xml" "$label" <<'PY'
 import re, sys, xml.etree.ElementTree as ET
@@ -51,6 +70,7 @@ wait_for() {
   for i in $(seq 1 40); do
     adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
     adb pull /sdcard/ui.xml "$OUT/ui.xml" >/dev/null 2>&1
+    dismiss_system_dialogs
     if grep -qi -- "$label" "$OUT/ui.xml"; then log "found '$label'"; return 0; fi
     sleep 1
   done
@@ -58,6 +78,8 @@ wait_for() {
   log "::error::'$label' never appeared"; FAIL=1; return 1
 }
 
+# Let the freshly booted emulator settle before starting.
+adb wait-for-device; sleep 30
 adb logcat -c
 adb install -r "$APK" || { echo "::error::install failed"; exit 1; }
 log "device: $(adb shell wm size) $(adb shell wm density)"
