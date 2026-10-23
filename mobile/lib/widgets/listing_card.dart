@@ -17,8 +17,8 @@ class ListingCard extends StatelessWidget {
       padding: EdgeInsets.zero,
       onTap: onTap,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        AspectRatio(
-          aspectRatio: 1,
+        // Photo takes whatever height is left after the text, so the card never overflows.
+        Expanded(
           child: Stack(fit: StackFit.expand, children: [
             NetImage(listing.coverUrl),
             Positioned(

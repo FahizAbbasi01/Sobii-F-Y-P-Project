@@ -29,7 +29,9 @@ class _MyDevicesScreenState extends State<MyDevicesScreen> {
     _future = fetchMyDevices(context.read<ApiClient>());
   }
 
-  void _reload() => setState(() => _future = fetchMyDevices(context.read<ApiClient>()));
+  void _reload() => setState(() {
+      _future = fetchMyDevices(context.read<ApiClient>());
+    });
 
   @override
   Widget build(BuildContext context) {

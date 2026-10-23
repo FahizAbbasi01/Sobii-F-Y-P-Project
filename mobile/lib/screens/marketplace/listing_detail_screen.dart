@@ -44,7 +44,9 @@ class _ListingDetailScreenState extends State<ListingDetailScreen> {
     );
   }
 
-  void _reload() => setState(() => _future = _load());
+  void _reload() => setState(() {
+      _future = _load();
+    });
 
   Future<void> _requestToBuy(Listing l) async {
     final sent = await showModalBottomSheet<bool>(

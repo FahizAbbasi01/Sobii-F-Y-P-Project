@@ -29,7 +29,9 @@ class _TransfersScreenState extends State<TransfersScreen> {
     return (data['transfers'] as List).map((e) => Transfer.fromJson(e as Map<String, dynamic>)).toList();
   }
 
-  void _reload() => setState(() => _future = _load());
+  void _reload() => setState(() {
+      _future = _load();
+    });
 
   @override
   Widget build(BuildContext context) {

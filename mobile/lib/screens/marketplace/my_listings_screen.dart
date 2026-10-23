@@ -28,7 +28,9 @@ class _MyListingsScreenState extends State<MyListingsScreen> {
     return (data['listings'] as List).map((e) => Listing.fromJson(e as Map<String, dynamic>)).toList();
   }
 
-  void _reload() => setState(() => _future = _load());
+  void _reload() => setState(() {
+      _future = _load();
+    });
 
   @override
   Widget build(BuildContext context) {

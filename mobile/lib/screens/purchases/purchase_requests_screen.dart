@@ -62,7 +62,9 @@ class _RequestListState extends State<_RequestList> with AutomaticKeepAliveClien
     return (data['requests'] as List).map((e) => PurchaseRequest.fromJson(e as Map<String, dynamic>)).toList();
   }
 
-  void _reload() => setState(() => _future = _load());
+  void _reload() => setState(() {
+      _future = _load();
+    });
 
   Future<void> _act(PurchaseRequest r, String action) async {
     final prompts = {

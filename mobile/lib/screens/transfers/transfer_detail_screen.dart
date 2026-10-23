@@ -32,7 +32,9 @@ class _TransferDetailScreenState extends State<TransferDetailScreen> {
     return Transfer.fromJson(data['transfer'] as Map<String, dynamic>);
   }
 
-  void _reload() => setState(() => _future = _load());
+  void _reload() => setState(() {
+      _future = _load();
+    });
 
   Future<void> _confirm(Transfer t) async {
     final message = t.isSender

@@ -47,7 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _refresh() async {
     final f = _load();
-    setState(() => _future = f);
+    setState(() {
+      _future = f;
+    });
     await f;
   }
 
@@ -184,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisCount: 2,
                           mainAxisSpacing: 12,
                           crossAxisSpacing: 12,
-                          childAspectRatio: 0.62,
+                          mainAxisExtent: 292,
                         ),
                         itemBuilder: (_, i) => ListingCard(listing: data.latest[i], onTap: () => context.push('/listing/${data.latest[i].id}')),
                       ),

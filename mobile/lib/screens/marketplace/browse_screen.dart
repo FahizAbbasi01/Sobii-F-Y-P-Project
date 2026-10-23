@@ -270,7 +270,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
         controller: _scroll,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
         itemCount: _items.length + (_items.length < _total ? 1 : 0),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 0.62),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 12, crossAxisSpacing: 12, mainAxisExtent: 292),
         itemBuilder: (_, i) {
           if (i >= _items.length) return const LoadingView();
           final l = _items[i];

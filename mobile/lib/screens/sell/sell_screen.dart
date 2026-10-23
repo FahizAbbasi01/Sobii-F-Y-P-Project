@@ -25,7 +25,9 @@ class _SellScreenState extends State<SellScreen> {
     _future = fetchMyDevices(context.read<ApiClient>());
   }
 
-  void _reload() => setState(() => _future = fetchMyDevices(context.read<ApiClient>()));
+  void _reload() => setState(() {
+      _future = fetchMyDevices(context.read<ApiClient>());
+    });
 
   Future<void> _go(String route) async {
     await context.push(route);

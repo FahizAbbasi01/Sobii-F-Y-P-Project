@@ -31,7 +31,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return (data['notifications'] as List).map((e) => AppNotification.fromJson(e as Map<String, dynamic>)).toList();
   }
 
-  void _reload() => setState(() => _future = _load());
+  void _reload() => setState(() {
+      _future = _load();
+    });
 
   Future<void> _readAll() async {
     try {

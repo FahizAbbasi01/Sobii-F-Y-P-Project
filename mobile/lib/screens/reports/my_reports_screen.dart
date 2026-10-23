@@ -41,7 +41,9 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
       await context.read<ApiClient>().post('/demo/reports/${r.id}/approve');
       if (!mounted) return;
       showSnack(context, 'Report approved (simulated)');
-      setState(() => _future = _load());
+      setState(() {
+      _future = _load();
+    });
     } catch (e) {
       if (mounted) showSnack(context, e.toString(), error: true);
     }
@@ -53,7 +55,9 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
       appBar: appBar(context, 'My Stolen Reports'),
       body: AsyncView<List<StolenReport>>(
         future: _future,
-        onRetry: () => setState(() => _future = _load()),
+        onRetry: () => setState(() {
+      _future = _load();
+    }),
         builder: (context, items) {
           if (items.isEmpty) {
             return const EmptyView(

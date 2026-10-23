@@ -13,7 +13,8 @@ Future<void> pumpUntil(WidgetTester t, Finder f, {int tries = 150}) async {
     await t.pump(const Duration(milliseconds: 100));
     if (f.evaluate().isNotEmpty) return;
   }
-  throw TestFailure('Timed out waiting for: $f');
+  final visible = find.byType(Text).evaluate().map((e) => (e.widget as Text).data ?? '').where((s) => s.trim().isNotEmpty).take(60).join(' | ');
+  throw TestFailure('Timed out waiting for: $f\nVisible text: $visible');
 }
 
 Future<void> tapOn(WidgetTester t, Finder f) async {
