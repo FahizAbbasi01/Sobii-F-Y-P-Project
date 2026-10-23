@@ -61,9 +61,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: Row(children: [
               const Icon(Icons.verified_user_rounded, color: AppColors.blue),
               const SizedBox(width: 8),
-              Text('DeviceTrust', style: AppText.headlineMd),
+              Flexible(child: Text('DeviceTrust', style: AppText.headlineMd, overflow: TextOverflow.ellipsis)),
               const SizedBox(width: 8),
-              const StatusBadge('PK Registry', kind: BadgeKind.info),
+              const Flexible(child: FittedBox(fit: BoxFit.scaleDown, child: StatusBadge('PK Registry', kind: BadgeKind.info))),
               const Spacer(),
               TextButton(onPressed: () => _finish('/login'), child: const Text('Skip')),
             ]),
