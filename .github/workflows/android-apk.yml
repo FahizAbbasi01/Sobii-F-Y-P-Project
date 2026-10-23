@@ -12,7 +12,7 @@ on:
     paths: ["mobile/**", ".github/workflows/android-apk.yml"]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -61,16 +61,36 @@ jobs:
         run: flutter test
 
       - name: Build universal release APK (armeabi-v7a + arm64-v8a + x86_64)
-        run: flutter build apk --release --target-platform android-arm,android-arm64,android-x64 --dart-define=API_BASE_URL="$API_BASE_URL"
+        run: |
+          set -o pipefail
+          flutter build apk --release --target-platform android-arm,android-arm64,android-x64 --dart-define=API_BASE_URL="$API_BASE_URL" 2>&1 | tee build.log
 
       - name: Inspect APK
         run: |
+          set -o pipefail
           APK=build/app/outputs/flutter-apk/app-release.apk
           ls -la "$APK"
-          unzip -l "$APK" | grep -E "lib/.*/libapp.so|lib/.*/libflutter.so"
+          unzip -l "$APK" | grep -E "lib/.*/libapp.so|lib/.*/libflutter.so" | tee -a build.log
 
       - uses: actions/upload-artifact@v4
         with:
           name: DeviceTrust-apk
           path: mobile/build/app/outputs/flutter-apk/app-release.apk
           retention-days: 30
+
+      # Logs/artifacts on blob storage are unreachable from the developer's network, so publish
+      # the build log (and the APK when it exists) to a dedicated branch that plain git can fetch.
+      - name: Publish APK and log to apk-output branch
+        if: always()
+        run: |
+          OUT=$(mktemp -d)
+          cp build.log "$OUT/build.log" 2>/dev/null || echo "no build log" > "$OUT/build.log"
+          [ -f build/app/outputs/flutter-apk/app-release.apk ] && cp build/app/outputs/flutter-apk/app-release.apk "$OUT/DeviceTrust.apk"
+          echo "commit=${GITHUB_SHA} run=${GITHUB_RUN_ID} api=${API_BASE_URL}" > "$OUT/BUILD_INFO.txt"
+          cd "$OUT"
+          git init -q -b apk-output
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -qm "APK build output for ${GITHUB_SHA}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" apk-output
