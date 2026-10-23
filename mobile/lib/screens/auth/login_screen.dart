@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/api_client.dart';
 import '../../core/auth_state.dart';
+import '../../demo/demo_backend.dart';
 import '../../core/theme.dart';
 import '../../widgets/common.dart';
 
@@ -57,6 +59,12 @@ class _LoginScreenState extends State<LoginScreen> {
     _error = context.read<AuthState>().startupError;
   }
 
+  Future<void> _useDemoAccount() async {
+    _email.text = DemoBackend.demoEmail;
+    _password.text = DemoBackend.demoPassword;
+    await _submit();
+  }
+
   Future<void> _submit() async {
     if (!_form.currentState!.validate()) return;
     setState(() {
@@ -90,6 +98,30 @@ class _LoginScreenState extends State<LoginScreen> {
             key: _form,
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const AuthHeader(title: 'Welcome Back', subtitle: 'Log in to verify devices, manage listings, and buy safely.'),
+              if (context.read<ApiClient>().isDemo) ...[
+                AppCard(
+                  accent: AppColors.amber,
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Row(children: [
+                      Text('Demo account', style: AppText.labelLg),
+                      const SizedBox(width: 8),
+                      const DemoBadge(),
+                    ]),
+                    const SizedBox(height: 6),
+                    Text('Email: ${DemoBackend.demoEmail}\nPassword: ${DemoBackend.demoPassword}', style: AppText.monoData),
+                    const SizedBox(height: 10),
+                    AppButton(
+                      key: const Key('demo-login'),
+                      label: 'Continue with demo account',
+                      icon: Icons.play_circle_outline_rounded,
+                      kind: ButtonKind.primary,
+                      loading: _busy,
+                      onPressed: _useDemoAccount,
+                    ),
+                  ]),
+                ),
+                const SizedBox(height: 20),
+              ],
               AppField(
                 label: 'Email',
                 controller: _email,
@@ -135,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Icon(Icons.lock_rounded, size: 14, color: AppColors.muted),
                 SizedBox(width: 6),
-                Text('Passwords are hashed; sessions use short-lived tokens', style: TextStyle(fontSize: 12, color: AppColors.muted)),
+                Flexible(child: Text('Secure sign-in', style: TextStyle(fontSize: 12, color: AppColors.muted))),
               ]),
             ]),
           ),

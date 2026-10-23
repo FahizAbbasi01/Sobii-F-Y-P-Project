@@ -28,6 +28,25 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
     return (data['reports'] as List).map((e) => StolenReport.fromJson(e as Map<String, dynamic>)).toList();
   }
 
+  Future<void> _approve(StolenReport r) async {
+    if (!await confirmDialog(context,
+        title: 'Approve report? (demo)',
+        message: 'The ${r.deviceName} will show as "Reported Stolen" in the demo registry and can no longer be sold or transferred.',
+        confirm: 'Approve',
+        danger: true)) {
+      return;
+    }
+    if (!mounted) return;
+    try {
+      await context.read<ApiClient>().post('/demo/reports/${r.id}/approve');
+      if (!mounted) return;
+      showSnack(context, 'Report approved (simulated)');
+      setState(() => _future = _load());
+    } catch (e) {
+      if (mounted) showSnack(context, e.toString(), error: true);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +75,21 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                   const SizedBox(height: 4),
                   Text('${formatDate(r.incidentDate)} • ${r.location}', style: AppText.bodySm),
                   Text('Filed ${timeAgo(r.createdAt)}', style: AppText.bodySm),
+                  if (r.status == 'pending' && context.read<ApiClient>().isDemo) ...[
+                    const SizedBox(height: 10),
+                    Row(children: [
+                      const DemoBadge(),
+                      const SizedBox(width: 8),
+                      Expanded(child: Text('Normally an admin reviews this on the web dashboard.', style: AppText.bodySm)),
+                    ]),
+                    const SizedBox(height: 8),
+                    AppButton(
+                      label: 'Simulate admin approval',
+                      kind: ButtonKind.danger,
+                      icon: Icons.gavel_rounded,
+                      onPressed: () => _approve(r),
+                    ),
+                  ],
                   if ((r.reviewNote ?? '').isNotEmpty) ...[
                     const SizedBox(height: 8),
                     Text('Admin note: ${r.reviewNote}', style: AppText.bodyMd),

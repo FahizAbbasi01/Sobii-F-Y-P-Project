@@ -2,14 +2,9 @@ name: Build Android APK
 
 on:
   workflow_dispatch:
-    inputs:
-      api_base_url:
-        description: "Backend URL the app connects to"
-        required: true
-        default: "http://192.168.0.104:4000"
   push:
     branches: [main]
-    paths: ["mobile/**", ".github/workflows/android-apk.yml"]
+    paths: ["mobile/**", ".github/workflows/android-apk.yml", ".github/scripts/**"]
 
 permissions:
   contents: write
@@ -17,12 +12,10 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     defaults:
       run:
         working-directory: mobile
-    env:
-      API_BASE_URL: ${{ github.event.inputs.api_base_url || 'http://192.168.0.104:4000' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -48,47 +41,62 @@ jobs:
           sed -i -E 's/minSdk\s*=\s*flutter\.minSdkVersion/minSdk = 23/; s/minSdkVersion\s+flutter\.minSdkVersion/minSdkVersion 23/' "$GRADLE"
           grep -n "minSdk" "$GRADLE"
           M=android/app/src/main/AndroidManifest.xml
-          grep -q 'android.permission.INTERNET' "$M" || sed -i 's#<manifest xmlns:android="http://schemas.android.com/apk/res/android">#&\n    <uses-permission android:name="android.permission.INTERNET"/>\n    <uses-permission android:name="android.permission.CAMERA"/>#' "$M"
-          # Demo build talks to a plain-HTTP backend; remove once the API is served over HTTPS.
-          sed -i 's#<application#<application android:usesCleartextTraffic="true"#' "$M"
+          grep -q 'android.permission.CAMERA' "$M" || sed -i 's#<manifest xmlns:android="http://schemas.android.com/apk/res/android">#&\n    <uses-permission android:name="android.permission.CAMERA"/>#' "$M"
           sed -i -E 's/android:label="[^"]*"/android:label="DeviceTrust"/' "$M"
           cat "$M"
 
       - run: flutter pub get
 
       - name: Analyze
-        run: flutter analyze --no-fatal-infos --no-fatal-warnings
-
-      - name: Unit tests
-        run: flutter test
-
-      - name: Build universal release APK (armeabi-v7a + arm64-v8a + x86_64)
         run: |
           set -o pipefail
-          flutter build apk --release --target-platform android-arm,android-arm64,android-x64 --dart-define=API_BASE_URL="$API_BASE_URL" 2>&1 | tee build.log
+          flutter analyze --no-fatal-infos --no-fatal-warnings 2>&1 | tee analyze.log
 
-      - name: Inspect APK
+      - name: Unit + UI flow tests (demo mode)
         run: |
           set -o pipefail
-          APK=build/app/outputs/flutter-apk/app-release.apk
-          ls -la "$APK"
-          unzip -l "$APK" | grep -E "lib/.*/libapp.so|lib/.*/libflutter.so" | tee -a build.log
+          flutter test 2>&1 | tee test.log
 
-      - uses: actions/upload-artifact@v4
+      - name: Build universal release APK (demo mode, offline)
+        run: |
+          set -o pipefail
+          flutter build apk --release --target-platform android-arm,android-arm64,android-x64 --dart-define=DEMO_MODE=true 2>&1 | tee build.log
+          ls -la build/app/outputs/flutter-apk/app-release.apk
+          unzip -l build/app/outputs/flutter-apk/app-release.apk | grep -E "lib/.*/libapp.so|fonts/Inter" | tee -a build.log
+
+      - name: Enable KVM for the emulator
+        if: success()
+        working-directory: .
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Install and run the APK on an Android emulator (airplane mode)
+        id: smoke
+        if: success()
+        continue-on-error: true
+        uses: reactivecircus/android-emulator-runner@v2
         with:
-          name: DeviceTrust-apk
-          path: mobile/build/app/outputs/flutter-apk/app-release.apk
-          retention-days: 30
+          api-level: 34
+          arch: x86_64
+          target: google_apis
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          working-directory: mobile
+          script: bash ../.github/scripts/emulator_smoke.sh build/app/outputs/flutter-apk/app-release.apk ${{ github.workspace }}/mobile/smoke
 
       # Logs/artifacts on blob storage are unreachable from the developer's network, so publish
-      # the build log (and the APK when it exists) to a dedicated branch that plain git can fetch.
-      - name: Publish APK and log to apk-output branch
+      # the APK, logs and emulator screenshots to a dedicated branch that plain git can fetch.
+      - name: Publish APK, logs and screenshots to apk-output branch
         if: always()
         run: |
           OUT=$(mktemp -d)
-          cp build.log "$OUT/build.log" 2>/dev/null || echo "no build log" > "$OUT/build.log"
+          for f in analyze.log test.log build.log; do cp "$f" "$OUT/" 2>/dev/null || true; done
           [ -f build/app/outputs/flutter-apk/app-release.apk ] && cp build/app/outputs/flutter-apk/app-release.apk "$OUT/DeviceTrust.apk"
-          echo "commit=${GITHUB_SHA} run=${GITHUB_RUN_ID} api=${API_BASE_URL}" > "$OUT/BUILD_INFO.txt"
+          [ -d smoke ] && cp -r smoke "$OUT/smoke"
+          echo "commit=${GITHUB_SHA} run=${GITHUB_RUN_ID} mode=demo smoke=${{ steps.smoke.outcome }}" > "$OUT/BUILD_INFO.txt"
           cd "$OUT"
           git init -q -b apk-output
           git config user.name "github-actions[bot]"
@@ -96,3 +104,7 @@ jobs:
           git add -A
           git commit -qm "APK build output for ${GITHUB_SHA}"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" apk-output
+
+      - name: Fail the job if the emulator check failed
+        if: steps.smoke.outcome == 'failure'
+        run: exit 1

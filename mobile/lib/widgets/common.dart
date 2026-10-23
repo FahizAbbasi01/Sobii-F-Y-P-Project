@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -502,6 +504,57 @@ class NetImage extends StatelessWidget {
       child: Icon(Icons.smartphone_rounded, size: iconSize, color: AppColors.muted),
     );
     if (url == null) return placeholder;
+    if (url!.startsWith('file://')) {
+      // Demo mode: photos are stored on the phone.
+      return Image.file(File(url!.substring(7)), fit: fit, errorBuilder: (_, __, ___) => placeholder);
+    }
     return Image.network(url!, fit: fit, errorBuilder: (_, __, ___) => placeholder);
+  }
+}
+
+// ---------------- Demo labelling ----------------
+
+/// Small "DEMO" pill shown next to simulated data.
+class DemoBadge extends StatelessWidget {
+  const DemoBadge({super.key, this.label = 'DEMO'});
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(color: AppColors.amberBg, borderRadius: BorderRadius.circular(999), border: Border.all(color: AppColors.amber)),
+      child: Text(label, style: AppText.labelSm.copyWith(color: AppColors.amberText, letterSpacing: 0.8)),
+    );
+  }
+}
+
+/// Full-width notice explaining that the app is running on simulated data.
+class DemoBanner extends StatelessWidget {
+  const DemoBanner({super.key, this.message});
+  final String? message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AppColors.amberBg,
+        borderRadius: BorderRadius.circular(AppRadius.md),
+        border: Border.all(color: const Color(0x66F59E0B)),
+      ),
+      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const Icon(Icons.science_outlined, size: 20, color: AppColors.amberText),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Text(
+            message ??
+                'Demo mode: works offline with sample data stored on this phone. People, phones and registry results are simulated.',
+            style: AppText.bodySm.copyWith(color: const Color(0xFF92400E)),
+          ),
+        ),
+      ]),
+    );
   }
 }

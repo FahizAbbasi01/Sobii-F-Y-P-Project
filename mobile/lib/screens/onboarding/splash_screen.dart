@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/auth_state.dart';
+import '../../core/config.dart';
 import '../../core/theme.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const SizedBox(height: 24),
             RichText(
-              text: TextSpan(style: GoogleFonts.inter(fontSize: 34, fontWeight: FontWeight.w800, color: Colors.white), children: const [
+              text: TextSpan(style: AppFonts.inter(fontSize: 34, fontWeight: FontWeight.w800, color: Colors.white), children: const [
                 TextSpan(text: 'Device'),
                 TextSpan(text: 'Trust', style: TextStyle(color: Color(0xFF6E9BFF))),
               ]),
@@ -57,7 +57,8 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(height: 24),
             Text('Karachi • Lahore • Islamabad', style: AppText.labelMd.copyWith(color: const Color(0xFF798BAC))),
             const SizedBox(height: 4),
-            Text('v0.7 • Community device registry', style: AppText.monoData.copyWith(color: const Color(0xFF798BAC))),
+            Text(AppConfig.demoMode ? 'v1.0 • Demo version (offline sample data)' : 'v1.0 • Community device registry',
+                style: AppText.monoData.copyWith(color: const Color(0xFF798BAC))),
             const SizedBox(height: 24),
           ]),
         ),

@@ -1,9 +1,12 @@
-/// Build-time configuration. Override with:
-///   flutter run --dart-define=API_BASE_URL=http://192.168.1.10:4000
+/// Build-time configuration.
 ///
-/// Defaults to the Android emulator's alias for your PC's localhost.
-/// No secrets live in the app: it only talks to the DeviceTrust API.
+/// DEMO_MODE (default: true) runs the whole app against the in-app demo backend
+/// with sample data stored on the phone, so no server or internet is needed.
+/// Build against the real server with:
+///   flutter build apk --dart-define=DEMO_MODE=false --dart-define=API_BASE_URL=https://your-api
 class AppConfig {
+  static const bool demoMode = bool.fromEnvironment('DEMO_MODE', defaultValue: true);
+
   static const String apiBaseUrl = String.fromEnvironment(
     'API_BASE_URL',
     defaultValue: 'http://10.0.2.2:4000',

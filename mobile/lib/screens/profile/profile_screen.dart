@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/api_client.dart';
 import '../../core/auth_state.dart';
 import '../../core/config.dart';
 import '../../core/format.dart';
@@ -42,7 +43,10 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(width: 14),
               Expanded(
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(u.fullName, style: AppText.headlineMd),
+                  Row(children: [
+                    Flexible(child: Text(u.fullName, style: AppText.headlineMd, overflow: TextOverflow.ellipsis)),
+                    if (context.read<ApiClient>().isDemo) ...[const SizedBox(width: 8), const DemoBadge()],
+                  ]),
                   Text(u.email, style: AppText.bodySm),
                   if (u.phone != null) Text(u.phone!, style: AppText.bodySm),
                   const SizedBox(height: 6),
@@ -87,17 +91,39 @@ class ProfileScreen extends StatelessWidget {
                 onTap: () => showAboutDialog(
                   context: context,
                   applicationName: 'DeviceTrust',
-                  applicationVersion: '0.7.0',
+                  applicationVersion: '1.0.0',
                   children: [
                     const Text('Community mobile device registry and verified marketplace. '
                         'Registry results are not official PTA/DIRBS checks.'),
                     const SizedBox(height: 8),
-                    Text('Server: ${AppConfig.apiBaseUrl}', style: AppText.monoData),
+                    Text(AppConfig.demoMode ? 'Mode: offline demo (sample data)' : 'Server: ${AppConfig.apiBaseUrl}', style: AppText.monoData),
                   ],
                 ),
               ),
             ]),
           ),
+          if (context.read<ApiClient>().isDemo) ...[
+            const SectionHeader('Demo'),
+            const DemoBanner(),
+            const SizedBox(height: 10),
+            AppButton(
+              label: 'Reset demo data',
+              kind: ButtonKind.ghost,
+              icon: Icons.restart_alt_rounded,
+              onPressed: () async {
+                if (!await confirmDialog(context,
+                    title: 'Reset demo data?',
+                    message: 'All sample phones, listings and requests return to their original state. Accounts you created on this phone are removed.',
+                    confirm: 'Reset',
+                    danger: true)) {
+                  return;
+                }
+                if (!context.mounted) return;
+                await context.read<ApiClient>().demo!.reset();
+                await auth.logout();
+              },
+            ),
+          ],
           const SizedBox(height: 20),
           AppButton(
             label: 'Log out',

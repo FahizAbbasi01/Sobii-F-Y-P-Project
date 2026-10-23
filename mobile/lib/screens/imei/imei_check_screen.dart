@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/api_client.dart';
+import '../../demo/demo_backend.dart';
 import '../../core/format.dart';
 import '../../core/imei.dart';
 import '../../core/theme.dart';
@@ -69,6 +70,30 @@ class _ImeiCheckScreenState extends State<ImeiCheckScreen> {
         const SizedBox(height: 20),
         Form(key: _form, child: ImeiField(controller: _imei, label: '15-digit IMEI')),
         AppButton(label: 'Verify IMEI', icon: Icons.manage_search_rounded, onPressed: _check, loading: _busy, kind: ButtonKind.navy),
+        if (context.read<ApiClient>().isDemo) ...[
+          const SizedBox(height: 16),
+          Row(children: [Text('Try a sample IMEI', style: AppText.labelLg), const SizedBox(width: 8), const DemoBadge()]),
+          const SizedBox(height: 8),
+          Wrap(spacing: 8, runSpacing: 8, children: [
+            for (final s in [
+              ('Registered', DemoBackend.sampleRegisteredImei, AppColors.greenText),
+              ('Reported stolen', DemoBackend.sampleStolenImei, AppColors.redText),
+              ('Not found', DemoBackend.sampleUnknownImei, AppColors.amberText),
+            ])
+              ActionChip(
+                key: Key('sample-${s.$1}'),
+                avatar: Icon(Icons.fingerprint_rounded, size: 16, color: s.$3),
+                label: Text(s.$1),
+                backgroundColor: AppColors.surface,
+                side: const BorderSide(color: AppColors.outline),
+                shape: const StadiumBorder(),
+                onPressed: () {
+                  _imei.text = s.$2;
+                  _check();
+                },
+              ),
+          ]),
+        ],
         const SizedBox(height: 8),
         TextButton.icon(
           onPressed: () async {
@@ -134,6 +159,7 @@ class _ResultCard extends StatelessWidget {
           Icon(icon, color: accent, size: 28),
           const SizedBox(width: 10),
           Expanded(child: Text(title, style: AppText.headlineLg)),
+          if (r.isDemo) ...[const DemoBadge(), const SizedBox(width: 6)],
           statusBadge(r.status),
         ]),
         const SizedBox(height: 10),
@@ -161,7 +187,8 @@ class _ResultCard extends StatelessWidget {
           ],
         ],
         const SizedBox(height: 8),
-        Text('Checked ${formatDateTime(r.checkedAt)} • Source: DeviceTrust registry', style: AppText.monoData),
+        if (r.disclaimer.isNotEmpty) ...[PtaDisclaimer(text: r.disclaimer), const SizedBox(height: 8)],
+        Text('Checked ${formatDateTime(r.checkedAt)} • Source: ${r.isDemo ? 'DEMO registry (simulated)' : 'DeviceTrust registry'}', style: AppText.monoData),
       ]),
     );
   }

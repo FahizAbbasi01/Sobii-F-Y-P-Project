@@ -4,6 +4,9 @@ import 'dart:io';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../demo/demo_backend.dart';
 
 import 'config.dart';
 
@@ -19,29 +22,52 @@ class ApiException implements Exception {
   String toString() => message;
 }
 
-/// Tokens live in the platform keystore (Android Keystore-backed), never in plain prefs.
+/// Tokens live in the platform keystore (Android Keystore-backed) for the real server.
+/// In demo mode there is no real credential to protect, so plain app storage is used
+/// (this also keeps the demo testable without platform plugins).
 class TokenStore {
+  TokenStore({this.secure = true});
+  final bool secure;
   static const _storage = FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true));
   String? accessToken;
   String? refreshToken;
 
+  Future<String?> _read(String k) async =>
+      secure ? _storage.read(key: k) : (await SharedPreferences.getInstance()).getString(k);
+
+  Future<void> _write(String k, String v) async {
+    if (secure) {
+      await _storage.write(key: k, value: v);
+    } else {
+      await (await SharedPreferences.getInstance()).setString(k, v);
+    }
+  }
+
+  Future<void> _delete(String k) async {
+    if (secure) {
+      await _storage.delete(key: k);
+    } else {
+      await (await SharedPreferences.getInstance()).remove(k);
+    }
+  }
+
   Future<void> load() async {
-    accessToken = await _storage.read(key: 'access_token');
-    refreshToken = await _storage.read(key: 'refresh_token');
+    accessToken = await _read('access_token');
+    refreshToken = await _read('refresh_token');
   }
 
   Future<void> save(String access, String refresh) async {
     accessToken = access;
     refreshToken = refresh;
-    await _storage.write(key: 'access_token', value: access);
-    await _storage.write(key: 'refresh_token', value: refresh);
+    await _write('access_token', access);
+    await _write('refresh_token', refresh);
   }
 
   Future<void> clear() async {
     accessToken = null;
     refreshToken = null;
-    await _storage.delete(key: 'access_token');
-    await _storage.delete(key: 'refresh_token');
+    await _delete('access_token');
+    await _delete('refresh_token');
   }
 }
 
@@ -52,9 +78,13 @@ class UploadFile {
 }
 
 class ApiClient {
-  ApiClient(this.tokens);
+  ApiClient(this.tokens, {this.demo});
 
   final TokenStore tokens;
+
+  /// When set, every call is answered by the in-app demo backend instead of the network.
+  final DemoBackend? demo;
+  bool get isDemo => demo != null;
   final http.Client _http = http.Client();
   Completer<bool>? _refreshing;
 
@@ -77,18 +107,30 @@ class ApiClient {
         if (tokens.accessToken != null) 'Authorization': 'Bearer ${tokens.accessToken}',
       };
 
-  Future<dynamic> get(String path, {Map<String, dynamic>? query}) =>
-      _send(() => _http.get(_uri(path, query), headers: _headers()));
+  Future<dynamic> _local(String method, String path, {Map<String, dynamic>? query, Object? body, List<UploadFile> files = const [], Map<String, String> fields = const {}}) async {
+    try {
+      return await demo!.handle(method, path, query: query, body: body, files: files, fields: fields, token: tokens.accessToken);
+    } on ApiException catch (e) {
+      if (e.status == 401 && path != '/auth/login' && path != '/auth/register') onSessionExpired?.call();
+      rethrow;
+    }
+  }
 
-  Future<dynamic> post(String path, [Object? body]) =>
-      _send(() => _http.post(_uri(path), headers: _headers(), body: jsonEncode(body ?? {})));
+  Future<dynamic> get(String path, {Map<String, dynamic>? query}) => isDemo
+      ? _local('GET', path, query: query)
+      : _send(() => _http.get(_uri(path, query), headers: _headers()));
+
+  Future<dynamic> post(String path, [Object? body]) => isDemo
+      ? _local('POST', path, body: body ?? {})
+      : _send(() => _http.post(_uri(path), headers: _headers(), body: jsonEncode(body ?? {})));
 
   Future<dynamic> patch(String path, Object body) =>
-      _send(() => _http.patch(_uri(path), headers: _headers(), body: jsonEncode(body)));
+      isDemo ? _local('PATCH', path, body: body) : _send(() => _http.patch(_uri(path), headers: _headers(), body: jsonEncode(body)));
 
-  Future<dynamic> delete(String path) => _send(() => _http.delete(_uri(path), headers: _headers()));
+  Future<dynamic> delete(String path) => isDemo ? _local('DELETE', path) : _send(() => _http.delete(_uri(path), headers: _headers()));
 
   Future<dynamic> multipart(String path, {required List<UploadFile> files, Map<String, String> fields = const {}}) {
+    if (isDemo) return _local('POST', path, files: files, fields: fields);
     return _send(() async {
       final req = http.MultipartRequest('POST', _uri(path))
         ..headers.addAll(_headers(json: false))

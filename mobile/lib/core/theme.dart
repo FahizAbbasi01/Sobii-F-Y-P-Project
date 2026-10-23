@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Design tokens from design/devicetrust_mobile_registry/DESIGN.md.
 class AppColors {
@@ -44,19 +43,28 @@ class AppShadows {
   ];
 }
 
+/// Fonts are bundled with the app (Inter + JetBrains Mono), so text renders the same offline.
+class AppFonts {
+  static TextStyle inter({double? fontSize, FontWeight? fontWeight, double? height, Color? color, double? letterSpacing, List<FontFeature>? fontFeatures}) =>
+      TextStyle(fontFamily: 'Inter', fontSize: fontSize, fontWeight: fontWeight, height: height, color: color, letterSpacing: letterSpacing, fontFeatures: fontFeatures);
+
+  static TextStyle mono({double? fontSize, FontWeight? fontWeight, double? height, Color? color}) =>
+      TextStyle(fontFamily: 'JetBrainsMono', fontSize: fontSize, fontWeight: fontWeight, height: height, color: color);
+}
+
 class AppText {
-  static TextStyle get headlineXl => GoogleFonts.inter(fontSize: 28, fontWeight: FontWeight.w700, height: 34 / 28, color: AppColors.ink);
-  static TextStyle get headlineLg => GoogleFonts.inter(fontSize: 22, fontWeight: FontWeight.w700, height: 28 / 22, color: AppColors.ink);
-  static TextStyle get headlineMd => GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600, height: 24 / 18, color: AppColors.ink);
-  static TextStyle get bodyLg => GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w400, height: 1.5, color: AppColors.ink);
-  static TextStyle get bodyMd => GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w400, height: 20 / 14, color: AppColors.slate);
-  static TextStyle get bodySm => GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w400, height: 16 / 12, color: AppColors.slate);
-  static TextStyle get labelLg => GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w600, height: 18 / 14, color: AppColors.ink);
-  static TextStyle get labelMd => GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, height: 16 / 12, color: AppColors.slate);
-  static TextStyle get labelSm => GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w600, height: 14 / 10, letterSpacing: 0.6, color: AppColors.slate);
-  static TextStyle get monoImei => GoogleFonts.jetBrainsMono(fontSize: 15, fontWeight: FontWeight.w500, height: 20 / 15, color: AppColors.ink);
-  static TextStyle get monoData => GoogleFonts.jetBrainsMono(fontSize: 12, fontWeight: FontWeight.w400, height: 16 / 12, color: AppColors.slate);
-  static TextStyle get price => GoogleFonts.inter(
+  static TextStyle get headlineXl => AppFonts.inter(fontSize: 28, fontWeight: FontWeight.w700, height: 34 / 28, color: AppColors.ink);
+  static TextStyle get headlineLg => AppFonts.inter(fontSize: 22, fontWeight: FontWeight.w700, height: 28 / 22, color: AppColors.ink);
+  static TextStyle get headlineMd => AppFonts.inter(fontSize: 18, fontWeight: FontWeight.w600, height: 24 / 18, color: AppColors.ink);
+  static TextStyle get bodyLg => AppFonts.inter(fontSize: 16, fontWeight: FontWeight.w400, height: 1.5, color: AppColors.ink);
+  static TextStyle get bodyMd => AppFonts.inter(fontSize: 14, fontWeight: FontWeight.w400, height: 20 / 14, color: AppColors.slate);
+  static TextStyle get bodySm => AppFonts.inter(fontSize: 12, fontWeight: FontWeight.w400, height: 16 / 12, color: AppColors.slate);
+  static TextStyle get labelLg => AppFonts.inter(fontSize: 14, fontWeight: FontWeight.w600, height: 18 / 14, color: AppColors.ink);
+  static TextStyle get labelMd => AppFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, height: 16 / 12, color: AppColors.slate);
+  static TextStyle get labelSm => AppFonts.inter(fontSize: 10, fontWeight: FontWeight.w600, height: 14 / 10, letterSpacing: 0.6, color: AppColors.slate);
+  static TextStyle get monoImei => AppFonts.mono(fontSize: 15, fontWeight: FontWeight.w500, height: 20 / 15, color: AppColors.ink);
+  static TextStyle get monoData => AppFonts.mono(fontSize: 12, fontWeight: FontWeight.w400, height: 16 / 12, color: AppColors.slate);
+  static TextStyle get price => AppFonts.inter(
         fontSize: 18,
         fontWeight: FontWeight.w700,
         color: AppColors.ink,
@@ -77,6 +85,6 @@ ThemeData buildTheme() {
     useMaterial3: true,
     colorScheme: scheme,
     scaffoldBackgroundColor: AppColors.canvas,
-    textTheme: GoogleFonts.interTextTheme(),
+    fontFamily: 'Inter',
   );
 }

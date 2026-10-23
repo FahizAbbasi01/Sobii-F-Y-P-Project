@@ -16,7 +16,6 @@ dependencies:
   shared_preferences: ^2.3.2
   image_picker: ^1.1.2
   google_mlkit_text_recognition: ^0.14.0
-  google_fonts: ^6.2.1
   intl: ^0.19.0
 
 dev_dependencies:
@@ -26,3 +25,21 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  # Fonts are bundled (SIL Open Font License, see assets/fonts/OFL-*.txt) so the app needs no internet.
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter_400Regular.ttf
+        - asset: assets/fonts/Inter_500Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Inter_600SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Inter_700Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Inter_800ExtraBold.ttf
+          weight: 800
+    - family: JetBrainsMono
+      fonts:
+        - asset: assets/fonts/JetBrainsMono_400Regular.ttf
+        - asset: assets/fonts/JetBrainsMono_500Medium.ttf
+          weight: 500

@@ -373,10 +373,14 @@ class RegistryResult {
   final String disclaimer;
   final String? checkedAt;
   final Map<String, dynamic>? device;
+  final String source;
 
-  RegistryResult({required this.imei, required this.status, this.reason, required this.disclaimer, this.checkedAt, this.device});
+  bool get isDemo => source == 'demo_registry';
+
+  RegistryResult({required this.source, required this.imei, required this.status, this.reason, required this.disclaimer, this.checkedAt, this.device});
 
   factory RegistryResult.fromJson(Map<String, dynamic> j) => RegistryResult(
+        source: (j['source'] ?? '') as String,
         imei: j['imei'] as String,
         status: j['status'] as String,
         reason: _str(j['reason']),

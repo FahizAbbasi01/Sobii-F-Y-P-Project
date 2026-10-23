@@ -68,6 +68,17 @@ class _NewTransferScreenState extends State<NewTransferScreen> {
             keyboardType: TextInputType.emailAddress,
             validator: emailValidator,
           ),
+          if (context.read<ApiClient>().isDemo) ...[
+            Row(children: [Text('Demo recipients', style: AppText.labelLg), const SizedBox(width: 8), const DemoBadge()]),
+            const SizedBox(height: 8),
+            Wrap(spacing: 8, runSpacing: 8, children: [
+              for (final e in const ['ali@demo.pk', 'sara@demo.pk', 'bilal@demo.pk', 'usman@demo.pk'])
+                ActionChip(label: Text(e), onPressed: () => setState(() => _email.text = e)),
+            ]),
+            const SizedBox(height: 6),
+            Text('Simulated users accept the transfer automatically; you then confirm to complete it.', style: AppText.bodySm),
+            const SizedBox(height: 16),
+          ],
           AppCard(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text('How it works', style: AppText.labelLg),
