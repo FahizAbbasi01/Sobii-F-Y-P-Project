@@ -17,8 +17,17 @@ Future<void> pumpUntil(WidgetTester t, Finder f, {int tries = 150}) async {
   throw TestFailure('Timed out waiting for: $f\nVisible text: $visible');
 }
 
+/// Floating snackbars sit over the bottom of the screen for a few seconds; wait for them
+/// to go away so taps land on the buttons underneath (as a real user would).
+Future<void> waitForSnackbars(WidgetTester t) async {
+  for (var i = 0; i < 60 && find.byType(SnackBar).evaluate().isNotEmpty; i++) {
+    await t.pump(const Duration(milliseconds: 100));
+  }
+}
+
 Future<void> tapOn(WidgetTester t, Finder f) async {
   await pumpUntil(t, f);
+  await waitForSnackbars(t);
   await t.ensureVisible(f.first);
   await t.pump(const Duration(milliseconds: 300));
   await t.tap(f.first, warnIfMissed: false);
@@ -103,7 +112,9 @@ void main() {
     await tapOn(t, find.byKey(const Key('sample-Registered')));
     await pumpUntil(t, find.textContaining('Apple iPhone 14 Pro'));
     // Invalid input is rejected before any lookup.
-    await t.enterText(field('15-digit IMEI'), '490154203237519');
+    await t.drag(find.byType(ListView).first, const Offset(0, 3000));
+    await t.pump(const Duration(milliseconds: 300));
+    await typeInto(t, '15-digit IMEI', '490154203237519');
     await tapOn(t, find.text('Verify IMEI'));
     await pumpUntil(t, find.textContaining('Check digit is wrong'));
   });

@@ -468,6 +468,7 @@ void showSnack(BuildContext context, String message, {bool error = false}) {
     ..showSnackBar(SnackBar(
       content: Text(message),
       behavior: SnackBarBehavior.floating,
+      duration: const Duration(seconds: 3),
       backgroundColor: error ? AppColors.redText : AppColors.navy,
     ));
 }
