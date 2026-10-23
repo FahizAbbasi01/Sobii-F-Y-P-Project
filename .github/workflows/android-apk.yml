@@ -41,6 +41,8 @@ jobs:
         run: |
           flutter create --platforms=android --org com.devicetrust --project-name devicetrust .
           rm -f test/widget_test.dart
+          # Flutter applies android/app/proguard-rules.pro to release builds automatically.
+          cp proguard-rules.pro android/app/proguard-rules.pro
           GRADLE=android/app/build.gradle.kts
           [ -f "$GRADLE" ] || GRADLE=android/app/build.gradle
           sed -i -E 's/minSdk\s*=\s*flutter\.minSdkVersion/minSdk = 23/; s/minSdkVersion\s+flutter\.minSdkVersion/minSdkVersion 23/' "$GRADLE"
