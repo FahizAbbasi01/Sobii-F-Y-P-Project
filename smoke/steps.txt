@@ -1,0 +1,31 @@
+device: Physical size: 1080x2400 Physical density: 420
+screenshot: 01_splash_or_onboarding
+found 'Discover Trusted Phones'
+screenshot: 02_onboarding
+tapped 'Skip' at 964 212
+found 'Welcome Back'
+screenshot: 03_login
+tapped 'Use demo account' at 540 992
+screenshot: 03b_after_demo_login
+found 'Find Your Next Phone'
+screenshot: 04_home
+tapped 'Explore' at 324 2248
+found 'phones found'
+screenshot: 05_explore
+tapped 'iPhone 14 Pro' at 283 1031
+found 'Request to Buy'
+screenshot: 06_listing_detail
+tapped 'Back' at 74 202
+found 'phones found'
+tapped 'Check IMEI' at 540 2248
+found 'Try a sample IMEI'
+screenshot: 07_imei_screen
+tapped 'Reported stolen' at 607 1115
+found 'Reported Stolen'
+screenshot: 08_imei_stolen_result
+tapped 'Sell' at 756 2248
+found 'Register a new phone'
+screenshot: 09_sell
+tapped 'Profile' at 972 2248
+found 'My activity'
+screenshot: 10_profile

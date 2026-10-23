@@ -1,0 +1,29 @@
+Upgrading build.gradle.kts
+Running Gradle task 'assembleRelease'...                        
+Checking the license for package NDK (Side by side) 28.2.13676358 in /usr/local/lib/android/sdk/licenses
+License for package NDK (Side by side) 28.2.13676358 accepted.
+Preparing "Install NDK (Side by side) 28.2.13676358 v.28.2.13676358".
+"Install NDK (Side by side) 28.2.13676358 v.28.2.13676358" ready.
+Installing NDK (Side by side) 28.2.13676358 in /usr/local/lib/android/sdk/ndk/28.2.13676358
+"Install NDK (Side by side) 28.2.13676358 v.28.2.13676358" complete.
+"Install NDK (Side by side) 28.2.13676358 v.28.2.13676358" finished.
+Checking the license for package CMake 3.22.1 in /usr/local/lib/android/sdk/licenses
+License for package CMake 3.22.1 accepted.
+Preparing "Install CMake 3.22.1 v.3.22.1".
+"Install CMake 3.22.1 v.3.22.1" ready.
+Installing CMake 3.22.1 in /usr/local/lib/android/sdk/cmake/3.22.1
+"Install CMake 3.22.1 v.3.22.1" complete.
+"Install CMake 3.22.1 v.3.22.1" finished.
+Expected to find fonts for (MaterialIcons, packages/cupertino_icons/CupertinoIcons), but found (MaterialIcons). This usually means you are referring to font families in an IconData class but not including them in the assets section of your pubspec.yaml, are missing the package that would include them, or are missing "uses-material-design: true".
+Font asset "MaterialIcons-Regular.otf" was tree-shaken, reducing it from 1645184 to 16072 bytes (99.0% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Caught exception: Already watching path: /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/android
+Running Gradle task 'assembleRelease'...                          282.8s
+✓ Built build/app/outputs/flutter-apk/app-release.apk (88.4MB)
+  7013264  1981-01-01 01:01   lib/arm64-v8a/libapp.so
+  7717452  1981-01-01 01:01   lib/armeabi-v7a/libapp.so
+  7275408  1981-01-01 01:01   lib/x86_64/libapp.so
+   342408  1981-01-01 01:01   assets/flutter_assets/assets/fonts/Inter_400Regular.ttf
+   342892  1981-01-01 01:01   assets/flutter_assets/assets/fonts/Inter_500Medium.ttf
+   343632  1981-01-01 01:01   assets/flutter_assets/assets/fonts/Inter_600SemiBold.ttf
+   344072  1981-01-01 01:01   assets/flutter_assets/assets/fonts/Inter_700Bold.ttf
+   344900  1981-01-01 01:01   assets/flutter_assets/assets/fonts/Inter_800ExtraBold.ttf

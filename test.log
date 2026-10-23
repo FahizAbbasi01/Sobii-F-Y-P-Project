@@ -1,0 +1,27 @@
+
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/demo_backend_test.dart: demo login works; wrong password and simulated users cannot log in
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/demo_backend_test.dart: registration creates a new local account
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/demo_backend_test.dart: registry: registered, stolen, not found, invalid — always labelled as demo / not PTA
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/demo_backend_test.dart: marketplace browse: search, filter and sort
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/demo_backend_test.dart: device registration validates IMEI and blocks duplicates
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/demo_backend_test.dart: buying a sample phone: seller accepts, ownership moves only after you confirm
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/demo_backend_test.dart: selling: simulated buyer offers, you accept, buyer pre-confirmed, you confirm
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/demo_backend_test.dart: cannot buy your own listing; duplicate open request blocked
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/demo_backend_test.dart: direct transfer to a simulated user + only one active transfer per device
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/demo_backend_test.dart: stolen report: pending -> simulated approval -> registry shows stolen and device is locked
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/demo_backend_test.dart: data persists across app restarts and reset restores sample data
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/demo_backend_test.dart: notifications are created and can be marked read
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/imei_test.dart: Imei.validate accepts a valid Luhn IMEI
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/imei_test.dart: Imei.validate rejects wrong check digit, length, letters and repeated digits
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/imei_test.dart: Imei.validate normalises spaces and dashes
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/imei_test.dart: Imei.extractFromText (OCR) finds valid IMEIs in label text and ignores invalid numbers
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/imei_test.dart: formatImei groups in quads
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/imei_test.dart: formatPkr
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/app_flow_test.dart: splash, onboarding, demo login and home dashboard
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/app_flow_test.dart: browse + search, request to buy, confirm transfer, become owner
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/app_flow_test.dart: IMEI verification with the sample registry
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/app_flow_test.dart: register a phone, list it, accept the simulated buyer and transfer it
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/app_flow_test.dart: report a device stolen and simulate admin approval
+✅ /home/runner/work/Sobii-F-Y-P-Project/Sobii-F-Y-P-Project/mobile/test/app_flow_test.dart: direct ownership transfer to a simulated user
+
+🎉 24 tests passed.
