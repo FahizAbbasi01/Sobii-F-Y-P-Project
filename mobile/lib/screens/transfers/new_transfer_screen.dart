@@ -68,7 +68,7 @@ class _NewTransferScreenState extends State<NewTransferScreen> {
             keyboardType: TextInputType.emailAddress,
             validator: emailValidator,
           ),
-          if (context.read<ApiClient>().isDemo) ...[
+          if (Provider.of<ApiClient>(context, listen: false).isDemo) ...[
             Row(children: [Text('Demo recipients', style: AppText.labelLg), const SizedBox(width: 8), const DemoBadge()]),
             const SizedBox(height: 8),
             Wrap(spacing: 8, runSpacing: 8, children: [

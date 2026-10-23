@@ -736,7 +736,7 @@ class DemoBackend {
         rows.sort(byDate);
     }
     final page = max(1, int.tryParse(q['page'] ?? '') ?? 1);
-    final limit = (int.tryParse(q['limit'] ?? '') ?? 20).clamp(1, 50);
+    final limit = (int.tryParse(q['limit'] ?? '') ?? 20).clamp(1, 50).toInt();
     final start = (page - 1) * limit;
     final slice = start >= rows.length ? <J>[] : rows.sublist(start, min(rows.length, start + limit));
     return {'listings': slice.map((l) => _listingDto(l)).toList(), 'page': page, 'limit': limit, 'total': rows.length};

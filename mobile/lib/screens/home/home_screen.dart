@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Text('Find Your Next Phone', style: AppText.headlineXl),
               const SizedBox(height: 4),
               Text('Registered devices, real ownership history.', style: AppText.bodyMd),
-              if (context.read<ApiClient>().isDemo) ...[const SizedBox(height: 12), const DemoBanner()],
+              if (Provider.of<ApiClient>(context, listen: false).isDemo) ...[const SizedBox(height: 12), const DemoBanner()],
               const SizedBox(height: 16),
               // Search
               Container(

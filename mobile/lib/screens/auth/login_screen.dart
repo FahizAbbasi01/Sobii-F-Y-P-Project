@@ -98,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
             key: _form,
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const AuthHeader(title: 'Welcome Back', subtitle: 'Log in to verify devices, manage listings, and buy safely.'),
-              if (context.read<ApiClient>().isDemo) ...[
+              if (Provider.of<ApiClient>(context, listen: false).isDemo) ...[
                 AppCard(
                   accent: AppColors.amber,
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

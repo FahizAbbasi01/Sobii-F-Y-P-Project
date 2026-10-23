@@ -45,7 +45,7 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Row(children: [
                     Flexible(child: Text(u.fullName, style: AppText.headlineMd, overflow: TextOverflow.ellipsis)),
-                    if (context.read<ApiClient>().isDemo) ...[const SizedBox(width: 8), const DemoBadge()],
+                    if (Provider.of<ApiClient>(context, listen: false).isDemo) ...[const SizedBox(width: 8), const DemoBadge()],
                   ]),
                   Text(u.email, style: AppText.bodySm),
                   if (u.phone != null) Text(u.phone!, style: AppText.bodySm),
@@ -102,7 +102,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ]),
           ),
-          if (context.read<ApiClient>().isDemo) ...[
+          if (Provider.of<ApiClient>(context, listen: false).isDemo) ...[
             const SectionHeader('Demo'),
             const DemoBanner(),
             const SizedBox(height: 10),

@@ -75,7 +75,7 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                   const SizedBox(height: 4),
                   Text('${formatDate(r.incidentDate)} • ${r.location}', style: AppText.bodySm),
                   Text('Filed ${timeAgo(r.createdAt)}', style: AppText.bodySm),
-                  if (r.status == 'pending' && context.read<ApiClient>().isDemo) ...[
+                  if (r.status == 'pending' && Provider.of<ApiClient>(context, listen: false).isDemo) ...[
                     const SizedBox(height: 10),
                     Row(children: [
                       const DemoBadge(),

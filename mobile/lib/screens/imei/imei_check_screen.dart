@@ -70,7 +70,7 @@ class _ImeiCheckScreenState extends State<ImeiCheckScreen> {
         const SizedBox(height: 20),
         Form(key: _form, child: ImeiField(controller: _imei, label: '15-digit IMEI')),
         AppButton(label: 'Verify IMEI', icon: Icons.manage_search_rounded, onPressed: _check, loading: _busy, kind: ButtonKind.navy),
-        if (context.read<ApiClient>().isDemo) ...[
+        if (Provider.of<ApiClient>(context, listen: false).isDemo) ...[
           const SizedBox(height: 16),
           Row(children: [Text('Try a sample IMEI', style: AppText.labelLg), const SizedBox(width: 8), const DemoBadge()]),
           const SizedBox(height: 8),
