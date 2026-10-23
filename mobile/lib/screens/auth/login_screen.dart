@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 10),
                     AppButton(
                       key: const Key('demo-login'),
-                      label: 'Continue with demo account',
+                      label: 'Use demo account',
                       icon: Icons.play_circle_outline_rounded,
                       kind: ButtonKind.primary,
                       loading: _busy,

@@ -7,7 +7,9 @@ mkdir -p "$OUT"
 PKG=com.devicetrust.devicetrust
 FAIL=0
 
-shot() { adb exec-out screencap -p > "$OUT/$1.png"; echo "screenshot: $1"; }
+STEP=0
+shot() { adb exec-out screencap -p > "$OUT/$1.png"; echo "screenshot: $1" | tee -a "$OUT/steps.txt"; }
+log() { echo "$*" | tee -a "$OUT/steps.txt"; }
 
 # tap_text "label" : find a node whose text/content-desc contains label and tap its centre.
 tap_text() {
@@ -37,10 +39,11 @@ if best:
     print(best[1], best[2])
 PY
 )
-    if [ -n "$xy" ]; then adb shell input tap $xy; echo "tapped '$label' at $xy"; sleep 2; return 0; fi
+    if [ -n "$xy" ]; then adb shell input tap $xy; log "tapped '$label' at $xy"; sleep 2; return 0; fi
     sleep 1
   done
-  echo "::error::Could not find '$label' on screen"; FAIL=1; return 1
+  STEP=$((STEP+1)); cp "$OUT/ui.xml" "$OUT/fail_${STEP}_ui.xml"; shot "fail_${STEP}_tap"
+  log "::error::Could not find '$label' on screen"; FAIL=1; return 1
 }
 
 wait_for() {
@@ -48,14 +51,16 @@ wait_for() {
   for i in $(seq 1 40); do
     adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
     adb pull /sdcard/ui.xml "$OUT/ui.xml" >/dev/null 2>&1
-    if grep -qi -- "$label" "$OUT/ui.xml"; then echo "found '$label'"; return 0; fi
+    if grep -qi -- "$label" "$OUT/ui.xml"; then log "found '$label'"; return 0; fi
     sleep 1
   done
-  echo "::error::'$label' never appeared"; FAIL=1; return 1
+  STEP=$((STEP+1)); cp "$OUT/ui.xml" "$OUT/fail_${STEP}_ui.xml"; shot "fail_${STEP}_wait"
+  log "::error::'$label' never appeared"; FAIL=1; return 1
 }
 
 adb logcat -c
 adb install -r "$APK" || { echo "::error::install failed"; exit 1; }
+log "device: $(adb shell wm size) $(adb shell wm density)"
 # Airplane mode ON: prove the demo works with no network at all.
 adb shell cmd connectivity airplane-mode enable 2>/dev/null || adb shell settings put global airplane_mode_on 1
 adb shell monkey -p $PKG -c android.intent.category.LAUNCHER 1 >/dev/null
@@ -64,13 +69,16 @@ shot 01_splash_or_onboarding
 wait_for "Discover Trusted Phones" && shot 02_onboarding
 tap_text "Skip"
 wait_for "Welcome Back" && shot 03_login
-tap_text "Continue with demo account"
+cp "$OUT/ui.xml" "$OUT/login_ui.xml"
+tap_text "Use demo account"
+sleep 3; shot 03b_after_demo_login
 wait_for "Find Your Next Phone" && sleep 2 && shot 04_home
 tap_text "Explore"
 wait_for "phones found" && sleep 1 && shot 05_explore
 tap_text "iPhone 14 Pro"
 wait_for "Request to Buy" && sleep 1 && shot 06_listing_detail
-adb shell input keyevent KEYCODE_BACK; sleep 2
+tap_text "Back"
+wait_for "phones found"
 tap_text "Check IMEI"
 wait_for "Try a sample IMEI" && shot 07_imei_screen
 tap_text "Reported stolen"
