@@ -104,6 +104,11 @@ void main() {
   testWidgets('IMEI verification with the sample registry', (t) async {
     await startSignedIn(t);
     await tapOn(t, find.text('Check IMEI'));
+    // Invalid input is rejected on the phone before any lookup.
+    await typeInto(t, '15-digit IMEI', '490154203237519');
+    await tapOn(t, find.text('Verify IMEI'));
+    await pumpUntil(t, find.textContaining('Check digit is wrong'));
+    // Sample IMEIs from the demo registry.
     await tapOn(t, find.byKey(const Key('sample-Reported stolen')));
     await pumpUntil(t, find.text('Reported Stolen'));
     expect(find.textContaining('NOT an official PTA'), findsOneWidget);
@@ -111,12 +116,6 @@ void main() {
     await pumpUntil(t, find.text('Not Found'));
     await tapOn(t, find.byKey(const Key('sample-Registered')));
     await pumpUntil(t, find.textContaining('Apple iPhone 14 Pro'));
-    // Invalid input is rejected before any lookup.
-    await t.drag(find.byType(ListView).first, const Offset(0, 3000));
-    await t.pump(const Duration(milliseconds: 300));
-    await typeInto(t, '15-digit IMEI', '490154203237519');
-    await tapOn(t, find.text('Verify IMEI'));
-    await pumpUntil(t, find.textContaining('Check digit is wrong'));
   });
 
   testWidgets('register a phone, list it, accept the simulated buyer and transfer it', (t) async {
